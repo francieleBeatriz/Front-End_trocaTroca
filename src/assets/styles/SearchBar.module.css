@@ -1,0 +1,39 @@
+/* SearchBar.module.css */
+.searchBarContainer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #F03A47;
+  border-radius: 5px;
+}
+
+.inputText {
+  border: none;
+  border-bottom: 1px solid #F03A47;
+  background-color: #100F0F;
+  color: rgba(240, 58, 71, 0.4);
+  margin-right: 10px;
+  font-size: 16px;
+  padding: 5px;
+  flex-grow: 1;
+}
+
+.inputSelect {
+  color: #100f0f;
+  background-color: #F03A47;
+  font-size: 16px;
+  border: none;
+}
+
+.button {
+  background-color: #F03A47;
+  border: none;
+  border-radius: 5px;
+  color: #100F0F;
+  padding: 5px 10px;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,20 @@
+.chatContainer{
+    background-color: #F03A47;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    margin: 5px;
+    border-radius: 15px;
+    padding: 10px;
+}
+.profile{
+    width: 32px;
+    height: 32px;
+    background-color: #0d0c0c;
+    border-radius: 50%;
+    
+}
+.chatName{
+    text-align: right;
+}

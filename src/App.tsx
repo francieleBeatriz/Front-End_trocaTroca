@@ -1,21 +1,40 @@
-import React from 'react';
-import './assets/styles/App.css';
-import './assets/styles/index.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import LogoTrocaTroca from './components/atoms/LogoTrocaTroca';
+import { AuthProvider, useAuth } from "./helpers/AuthContext";
 
-import FormularioCadastro from './components/organisms/FormularioCadastro';
+import "./assets/styles/App.css";
+import "./assets/styles/index.css";
 
+import LogoTrocaTroca from "./components/atoms/LogoTrocaTroca";
+import { ChatScreen } from "./components/templates/ChatScreen";
+import { Logout } from "./components/organisms/Logout";
+import { Login } from "./components/organisms/Login";
+import FormularioCadastro from "./components/organisms/FormularioCadastro";
 
-export default class App extends React.Component 
+export function App()
 {
-  render() 
-  {
-    return (
-      <div>
-        <LogoTrocaTroca/>
-        <FormularioCadastro/>
-      </div>
-    );
-  }
+  const auth = useAuth();
+
+  return (
+    <>
+      <LogoTrocaTroca/>
+      <Router>
+        <div className="app-container">
+          <Routes>
+            <Route
+              path="/"
+              element={auth.isAuthenticated ? <ChatScreen/> : <FormularioCadastro/>}/>
+            <Route
+              path="/chats"
+              element={
+                <ChatScreen />
+              }
+            />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/logout" element={<Logout/>} />
+          </Routes>
+        </div>
+      </Router>
+    </>
+  );
 }

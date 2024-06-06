@@ -8,11 +8,21 @@ body
 {
     display: flex;
     justify-content: center;
-    align-items: center;
+
     min-height: 100vh;
     background-color: #0d0c0c;
     font-family: "Roboto Slab", serif;
+
+    box-sizing: border-box;
 }
+#nome-logo{
+    display: flex;
+    gap: 3px;
+    color: #F03A47;
+    align-items: center;
+    justify-content: center;
+}
+
 #form-cadastro {
     position: relative;
     display: flex;
@@ -106,20 +116,7 @@ h1{
     font-size: 20px;
 }
 
-#nome-logo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #F03A47;
-    font-size: 20px;
-    font-family: "Roboto Serif", serif;;
 
-    width: 100%;
-    padding: 10px 0; 
-    position: fixed;
-    top: 0;
-    left: 0;
-}
 #logo{
     width: 40px;
     height: 25px;
