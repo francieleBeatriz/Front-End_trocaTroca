@@ -9,7 +9,7 @@ import LogoTrocaTroca from "./components/atoms/LogoTrocaTroca";
 import { ChatScreen } from "./components/templates/ChatScreen";
 import { Logout } from "./components/organisms/Logout";
 import { Login } from "./components/organisms/Login";
-import FormularioCadastro from "./components/organisms/FormularioCadastro";
+import {FormularioCadastro} from "./components/organisms/FormularioCadastro";
 
 export function App()
 {
@@ -28,6 +28,12 @@ export function App()
               path="/chats"
               element={
                 <ChatScreen />
+              }
+            />
+            <Route
+              path="/esqueceuAsenha"
+              element={
+                <h1>ESQUECEU A SENHA!</h1>
               }
             />
             <Route path="/login" element={<Login/>} />

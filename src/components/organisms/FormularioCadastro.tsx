@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
-import Menu from '../molecules/Menu'
+export const ContentContext = createContext({ content: 'Home', setContent: (newContent: string): void => {} });
+
+import {Menu} from '../molecules/Menu'
 
 import CampoApelido from '../molecules/CampoApelido';
 import CampoSenha from '../molecules/CampoSenha';
@@ -9,20 +11,27 @@ import CampoConfirmaSenha from '../molecules/CampoConfirmaSenha';
 import LinkRedirecionamento from '../atoms/LinkRedirecionamenrto';
 import BotaoAvatar from '../atoms/BotaoAvatar';
 
-export default class App extends React.Component 
+export function FormularioCadastro()
 {
-  render() 
-  {
-    return (
-      
+  const [content, setContent] = useState('cadastrar');
+
+  return (
+    <ContentContext.Provider value={{ content, setContent }}>
       <div id="form-cadastro">
         <Menu/>
-        <CampoApelido/> 
-        <CampoSenha/>
-        <CampoConfirmaSenha/>
-        <LinkRedirecionamento/>
-        <BotaoAvatar/>
+        {content == "cadastrar" && (
+          <>
+            <CampoApelido />
+            <CampoSenha />
+            <CampoConfirmaSenha />
+            <LinkRedirecionamento />
+            <BotaoAvatar />
+          </>
+        )}
+        {content == "avatar" && (
+          <h1>Hello World!</h1>
+        )}
       </div>
-    );
-  }
+    </ContentContext.Provider>
+  );
 }
