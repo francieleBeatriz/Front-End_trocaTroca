@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { StyledTituloPagina } from '../../assets/styles/StyledComponents'
+import React from 'react';
+import { StyledTituloPagina } from '../../assets/styles/StyledComponents';
 
 interface TituloPaginaProps {
     textoTitulo: string;
 }
-class TituloPagina extends Component<TituloPaginaProps>{
-    render() {
-        return (
-                <StyledTituloPagina>{this.props.textoTitulo}</StyledTituloPagina>
-        );
-    }
+
+const TituloPagina: React.FC<TituloPaginaProps> = ({ textoTitulo }) => {
+    return (
+        <StyledTituloPagina>{textoTitulo}</StyledTituloPagina>
+    );
 }
+
 export default TituloPagina;

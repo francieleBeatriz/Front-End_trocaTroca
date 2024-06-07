@@ -2,7 +2,7 @@ import React from 'react';
 
 import './assets/styles/App.css';
 
-import { Login } from './components/organisms/Login'
+import  EsqueceuSenha  from './components/organisms/EsqueceuSenha'
 
 import { LogoTrocaTroca } from './components/atoms/LogoTrocaTroca';
 
@@ -15,7 +15,7 @@ export default class App extends React.Component
     return (
       <StyledBody>
         <LogoTrocaTroca/>
-        <Login/>
+        <EsqueceuSenha/>
       </StyledBody>
     );
   }
