@@ -8,7 +8,7 @@ export default class App extends React.Component
   {
     return (
       <div>
-        <Label texto="Apelido. " subtexto="apelidos são únicos"/>
+        <Label texto="Chave. " subtexto="chave única gerada para você"/>
         <Input placeholder="digite aqui..."/>
       </div>
     );

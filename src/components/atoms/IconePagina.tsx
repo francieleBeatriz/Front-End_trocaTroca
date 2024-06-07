@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import IconeInformacoes from '../../assets/images/pessoaInformacoes.svg'
+import React from 'react';
+import { StyledIconePagina } from '../../assets/styles/StyledComponents'
 
 interface IconePaginaProps {
     iconePagina: string;
 }
-class IconePagina extends Component<IconePaginaProps>{
-    render() {
-        return (
-                <img src={this.props.iconePagina} alt="icone da pagina" id="iconePagina" />
-        );
-    }
+
+const IconePagina: React.FC<IconePaginaProps> = ({ iconePagina }) => {
+    return (
+        <StyledIconePagina src={iconePagina} alt="Ícone da página" id="iconePagina" />
+    );
 }
+
 export default IconePagina;

@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { StyledLabel, StyledSpan } from '../../assets/styles/StyledComponents';
 
 interface LabelProps {
     texto: string;
     subtexto: string;
 }
 
-class Label extends Component<LabelProps> {
-    render() {
-        return (
-                <p id="label">
-                    {this.props.texto}.
-                    <span> {this.props.subtexto}
-                    </span>
-                </p>
-        );
-    }
+const Label: React.FC<LabelProps> = ({ texto, subtexto }) => {
+    return (
+        <StyledLabel>
+            {texto}
+            <StyledSpan>{subtexto}</StyledSpan>
+        </StyledLabel>
+    );
 }
 
 export default Label;

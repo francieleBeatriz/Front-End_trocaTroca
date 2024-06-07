@@ -8,7 +8,7 @@ export default class App extends React.Component
   {
     return (
       <div>
-        <Label texto="Senha" subtexto="use algo previsível"/>
+        <Label texto="Senha. " subtexto="use algo imprevisível"/>
         <Input placeholder="digite aqui..."/>
       </div>
     );

@@ -7,21 +7,23 @@ import IconeInformacoes from '../../assets/images/pessoaInformacoes.svg';
 
 import IconeAvatar from '../../assets/images/iconeAvatar.svg'
 
+import {StyledMainMenu, StyledNavItem, StyledPrimeiroItemMenu} from '../../assets/styles/StyledComponents';
 export default class App extends React.Component 
 {
   render() 
   {
     return (
-        <div id="menuNav">
-            <div id="navCadastrar">
-                <IconePagina iconePagina={IconeInformacoes}/>
-                <TituloPagina textoTitulo="CADASTRAR"/>
-            </div>
-            <div id="navAvatar">
-                <IconePagina iconePagina={IconeAvatar}/>
-                <TituloPagina textoTitulo="AVATAR"/>
-            </div>
-        </div>
+        <StyledMainMenu>
+            <StyledNavItem>
+                  <IconePagina iconePagina={IconeInformacoes}/>
+                  <TituloPagina textoTitulo="CADASTRAR"/>
+            </StyledNavItem>
+            
+            <StyledNavItem>
+                  <IconePagina iconePagina={IconeAvatar}/>
+                  <TituloPagina textoTitulo="AVATAR"/>
+            </StyledNavItem>
+        </StyledMainMenu>
     );
   }
 }

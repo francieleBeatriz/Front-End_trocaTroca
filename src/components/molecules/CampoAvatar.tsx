@@ -1,6 +1,5 @@
 import React from 'react';
 import Label from '../atoms/Label';
-import Input from '../atoms/Input';
 
 export default class App extends React.Component 
 {
@@ -8,8 +7,7 @@ export default class App extends React.Component
   {
     return (
       <div>
-        <Label texto="Apelido. " subtexto="apelidos são únicos"/>
-        <Input placeholder="digite aqui..."/>
+        <Label texto="Avatar. " subtexto="escolha um que combine com você"/>
       </div>
     );
   }

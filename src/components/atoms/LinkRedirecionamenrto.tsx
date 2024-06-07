@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { StyledLink } from '../../assets/styles/StyledComponents';
 
-class LinkRedirecionamento extends Component {
-    render() {
-        return (
-            <p>Já possui uma conta? <a href="#">ENTRE AQUI</a></p>
-        );
-    }
+interface RedirecionaProps {
+    textoLabel: string;
+    textoLink: string;
+}
+
+const LinkRedirecionamento: React.FC<RedirecionaProps> = ({ textoLabel, textoLink }) => {
+    return (
+        <p>
+            {textoLabel}
+            <StyledLink href="#">{textoLink}</StyledLink>
+        </p>
+    );
 }
 
 export default LinkRedirecionamento;
-

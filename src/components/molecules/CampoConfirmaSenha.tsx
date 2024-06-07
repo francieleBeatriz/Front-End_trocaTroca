@@ -8,7 +8,7 @@ export default class App extends React.Component
   {
     return (
       <div>
-        <Label texto="Confirmar Senha" subtexto="repita a senha"/>
+        <Label texto="Confirmar Senha. " subtexto="repita a senha"/>
         <Input placeholder="digite aqui..."/>
       </div>
     );

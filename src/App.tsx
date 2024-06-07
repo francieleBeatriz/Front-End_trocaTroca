@@ -1,21 +1,22 @@
 import React from 'react';
+
 import './assets/styles/App.css';
-import './assets/styles/index.css';
 
-import LogoTrocaTroca from './components/atoms/LogoTrocaTroca';
+import { Login } from './components/organisms/Login'
 
-import FormularioCadastro from './components/organisms/FormularioCadastro';
+import { LogoTrocaTroca } from './components/atoms/LogoTrocaTroca';
 
+import { StyledBody } from './assets/styles/StyledComponents'
 
 export default class App extends React.Component 
 {
   render() 
   {
     return (
-      <div>
+      <StyledBody>
         <LogoTrocaTroca/>
-        <FormularioCadastro/>
-      </div>
+        <Login/>
+      </StyledBody>
     );
   }
 }
