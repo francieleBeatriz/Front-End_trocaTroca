@@ -1,0 +1,11 @@
+services:
+  nodejs:
+    image: node:lts-alpine
+    working_dir: /application
+    volumes:
+      - .:/application
+    ports:
+      - 5173:5173
+    entrypoint: sh init.sh
+    command: npm run dev -- --host 0.0.0.0
+    restart: always

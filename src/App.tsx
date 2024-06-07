@@ -1,22 +1,19 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import './assets/styles/App.css';
+import LogoTrocaTroca from './components/atoms/LogoTrocaTroca';
 
-import  EsqueceuSenha  from './components/organisms/EsqueceuSenha'
+import FormularioCadastro from './components/organisms/FormularioCadastro';
 
-import { LogoTrocaTroca } from './components/atoms/LogoTrocaTroca';
 
-import { StyledBody } from './assets/styles/StyledComponents'
-
-export default class App extends React.Component 
+export function App()
 {
   render() 
   {
     return (
-      <StyledBody>
+      <div>
         <LogoTrocaTroca/>
-        <EsqueceuSenha/>
-      </StyledBody>
+        <FormularioCadastro/>
+      </div>
     );
   }
 }
