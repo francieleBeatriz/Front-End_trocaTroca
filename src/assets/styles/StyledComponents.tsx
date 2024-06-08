@@ -88,6 +88,10 @@ export const StyledBotao = styled.button`
     align-items: center;       
     justify-content: center;
     font-family: "Roboto Slab", serif; 
+
+    img{
+        margin-left: 5px
+    }
 `;
 
 export const StyledLabel = styled.p`
@@ -134,6 +138,7 @@ export const StyledNavItem = styled.div`
 export const StyledTituloPagina = styled.div`
     font-size: 20px;
     font-weight: 800;
+    color: ${props => props.color};
 `;
 
 export const StyledImagemAvatar = styled.div`

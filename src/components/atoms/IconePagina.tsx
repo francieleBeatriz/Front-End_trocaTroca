@@ -3,12 +3,12 @@ import { StyledIconePagina } from '../../assets/styles/StyledComponents'
 
 interface IconePaginaProps {
     iconePagina: string;
-    cor: string;
+    filter: string;
 }
 
-const IconePagina: React.FC<IconePaginaProps> = ({ iconePagina }) => {
+const IconePagina: React.FC<IconePaginaProps> = ({ iconePagina, filter }) => {
     return (
-        <StyledIconePagina src={iconePagina} alt="Ícone da página" id="iconePagina" />
+        <StyledIconePagina src={iconePagina} alt="Ícone da página" style={{ filter }}/>
     );
 }
 
