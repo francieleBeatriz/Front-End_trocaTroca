@@ -4,13 +4,16 @@ import { StyledLink } from '../../assets/styles/StyledComponents';
 interface RedirecionaProps {
     textoLabel: string;
     textoLink: string;
+    to: string; 
 }
 
-const LinkRedirecionamento: React.FC<RedirecionaProps> = ({ textoLabel, textoLink }) => {
+const LinkRedirecionamento: React.FC<RedirecionaProps> = ({ textoLabel, textoLink, to }) => {
     return (
         <p>
             {textoLabel}
-            <StyledLink href="#">{textoLink}</StyledLink>
+                <StyledLink to={to} component={StyledLink}>
+                    {textoLink}
+                </StyledLink>
         </p>
     );
 }

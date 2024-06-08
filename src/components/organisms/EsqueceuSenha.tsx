@@ -16,7 +16,7 @@ const EsqueceuSenha = () => {
       <Menu />
       <CampoChave />
       <CampoSenha />
-      <LinkRedirecionamento textoLabel="Faça o login " textoLink="AQUI" />
+      <LinkRedirecionamento textoLabel="Faça o login " textoLink="AQUI!" to="/login"/>
       <Botao textoBotao="SALVAR" imgBotao={arrowRight2} />
     </StyledFormulario>
   );

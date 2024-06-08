@@ -18,7 +18,7 @@ const Cadastrar = () => {
       <CampoApelido /> 
       <CampoSenha />
       <CampoConfirmaSenha />
-      <LinkRedirecionamento textoLabel="Já possui uma conta? " textoLink="ENTRE AQUI" />
+      <LinkRedirecionamento textoLabel="Já possui uma conta? " textoLink="ENTRE AQUI" to="/login"/>
       <Botao textoBotao="AVATAR" imgBotao={arrowRight} />
     </StyledFormulario>
   );

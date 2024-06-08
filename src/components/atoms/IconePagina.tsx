@@ -3,6 +3,7 @@ import { StyledIconePagina } from '../../assets/styles/StyledComponents'
 
 interface IconePaginaProps {
     iconePagina: string;
+    cor: string;
 }
 
 const IconePagina: React.FC<IconePaginaProps> = ({ iconePagina }) => {

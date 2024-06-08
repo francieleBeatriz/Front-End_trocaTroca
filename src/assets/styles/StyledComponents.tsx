@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledBody = styled.div`
     display: flex;
@@ -99,7 +100,7 @@ export const StyledSpan = styled.span`
     color: #962931;
 `;
 
-export const StyledLink = styled.a`
+export const StyledLink = styled(Link)`
     color: #0d0c0c;
     font-weight: 800;
 `;
