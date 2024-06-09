@@ -3,12 +3,11 @@ export class UserModel
     public static async criarUsuario(
         apelido: string,
         senha: string,
-        confirmarSenha: string,
-        caminhoFoto: string
+        confirmarSenha: string
     )
     {
 
-        if(!apelido || !senha || !confirmarSenha || !caminhoFoto) return -1;
+        if(!apelido || !senha || !confirmarSenha) return -1;
 
         if(senha != confirmarSenha) return -1;
 
@@ -22,7 +21,7 @@ export class UserModel
                 body: JSON.stringify({
                     "apelido": apelido,
                     "senha": senha,
-                    "caminhoFoto": caminhoFoto
+                    "confirmarSenha": confirmarSenha
                 })
             }
         )

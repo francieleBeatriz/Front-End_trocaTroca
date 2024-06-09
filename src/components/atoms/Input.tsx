@@ -2,20 +2,21 @@ import React from 'react';
 import { StyledInput } from '../../assets/styles/StyledComponents'
 
 interface InputProps {
-    placeholder: string;
+    placeholder?: string;
     value?: string;
     onChange?: (e: React.ChangeBridge<HTMLInputElement>) => void;
     className?: string;
+    type?: string;
 }
 
-const Input: React.FC<InputProps> = ({ placeholder, value, onChange, className }) => {
+const Input: React.FC<InputProps> = ({ placeholder, value, onChange, className, type }) => {
     return (
-        <StyledInput 
-            type="text" 
+        <StyledInput  
             className={className} 
             placeholder={placeholder} 
             value={value} 
-            onChange={onChange} 
+            onChange={onChange}
+            type={type} 
         />
     );
 }

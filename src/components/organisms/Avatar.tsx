@@ -15,7 +15,7 @@ const Avatar = () => {
       <Menu />
       <CampoAvatar />
       <ImagemAvatar />
-      <Botao textoBotao="SALVAR" imgBotao={iconeSalvar} />
+      <Botao textoBotao="SALVAR" imgBotao={iconeSalvar} reverse/>
     </StyledFormulario>
   );
 }

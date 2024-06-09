@@ -16,10 +16,9 @@ const Cadastrar = () => {
   const [ apelido, setApelido ] = useState<string>("");
   const [ senha, setSenha ] = useState<string>("");
   const [ confimaSenha, setConfirmaSenha ] = useState<string>("");
-  const [ caminhoFoto, setCaminhoFoto ] = useState<string>("/images/profile_1.jpg");
 
   const criarUsuario = () => {
-    UsuarioController.criarUsuario(apelido, senha, confimaSenha, caminhoFoto)
+    UsuarioController.criarUsuario(apelido, senha, confimaSenha)
   }
 
   return (

@@ -20,7 +20,7 @@ const Login = () => {
       <CampoApelido />
       <CampoSenha />
         <LinkRedirecionamento textoLabel="Não possui uma conta? " textoLink="CADASTRE AQUI" to="/cadastrar"/>
-      <Botao textoBotao="ENTRAR" imgBotao={arrowRight2} />
+      <Botao textoBotao="ENTRAR" imgBotao={arrowRight2} reverse/>
     </StyledFormulario>
   );
 };

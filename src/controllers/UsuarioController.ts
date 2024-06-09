@@ -5,16 +5,13 @@ export class UsuarioController
     public static async criarUsuario(
         apelido: string, 
         senha: string, 
-        confirmarSenha: string, 
-        caminhoFoto: string
+        confirmarSenha: string 
     )
     {
-        
         const RESPONSE  = await UserModel.criarUsuario(
             apelido,
             senha,
-            confirmarSenha,
-            caminhoFoto
+            confirmarSenha
         );
 
         console.log(RESPONSE);
