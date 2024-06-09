@@ -2,11 +2,11 @@ import React from 'react';
 import Label from '../atoms/Label';
 import Input from '../atoms/Input';
 
-const CampoApelido = () => {
+function CampoApelido({ onChange }: { onChange: (text: string) => void }) {
   return (
     <div>
       <Label texto="Apelido. " subtexto="apelidos são únicos"/>
-      <Input placeholder="digite aqui..."/>
+      <Input placeholder="digite aqui..." onChange={(event) => onChange(event.target.value)}/>
     </div>
   );
 }
