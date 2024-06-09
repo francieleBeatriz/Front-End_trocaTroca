@@ -10,11 +10,9 @@ interface TextoBotaoProps {
 
 const Botao: React.FC<TextoBotaoProps> = ({ textoBotao, imgBotao, reverse, onClick }) => {
     return (
-        <StyledBotao reverse={reverse}>
-            {textoBotao} 
-            {imgBotao && 
-                <img src={imgBotao} alt="Ícone do Botão" onClick={() => onClick()}/>
-            } 
+        <StyledBotao reverse={reverse} onClick={onClick}>
+            {textoBotao}
+            {imgBotao && <img src={imgBotao} alt="Ícone do Botão" />}
         </StyledBotao>
     );
 }

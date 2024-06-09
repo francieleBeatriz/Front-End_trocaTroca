@@ -55,6 +55,18 @@ export const StyledFormulario = styled.div`
   }
 `;
 
+export const SyledChaveUnicaFormulario = styled.div`
+    background-color: #F03A47;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+`
+
 export const StyledInput = styled.input`
     width: 100%;
     background: transparent;
@@ -113,8 +125,8 @@ export const StyledDivBotoesChave = styled.div`
     display: flex;
     justify-content: space-between;
 `
-export const StyledInputChave = styled.textarea`
-  height: 130px;
+export const StyledInputChave = styled.input`
+  height: fit-content;
   width: 100%;
   border-radius: 10px;
   border: none;
@@ -125,6 +137,7 @@ export const StyledInputChave = styled.textarea`
   padding: 10px;
   box-sizing: border-box;
   resize: none;
+  overflow-x: scroll;
 `
 export const StyledLabel = styled.p`
     font-size: 18px;

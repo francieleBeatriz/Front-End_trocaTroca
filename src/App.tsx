@@ -14,41 +14,47 @@ import EsqueceuSenha from "./components/organisms/EsqueceuSenha";
 import ChaveUnica from "./components/organisms/ChaveUnica";
 
 import { ChatScreen } from "./components/templates/ChatScreen";
+import { TelaCadastro } from "./components/templates/TelaCadastro";
+import { TelaLogin } from "./components/templates/TelaLogin";
 
 export function App()
 {
   const auth = useAuth();
-    return (
-      <StyledBody>
-        <LogoTrocaTroca />
-        <Router>
-            <Routes>
-              <Route
-                path="/cadastrar"
-                element={auth.isAuthenticated ? <ChatScreen /> : <Cadastrar />}
-              />
-              <Route
-                path="/avatar"
-                element={<Avatar />}
-              />
-              <Route 
-                path="/login" 
-                element={<Login />} 
-              />
-              <Route 
-                path="/esqueceusenha" 
-                element={<EsqueceuSenha />} 
-              />
-              <Route 
-                path="/chatlista" 
-                element={<ChatScreen />} 
-              />
-              <Route 
-                path="/chaveunica" 
-                element={<ChaveUnica />} 
-              />
-            </Routes>
-        </Router>
-      </StyledBody>
-    );
+  return (
+    <StyledBody>
+      <LogoTrocaTroca />
+      <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={localStorage.getItem("auth_key") ? <TelaCadastro page={1}/> : <ChatScreen></ChatScreen>}
+            />
+            <Route
+              path="/cadastrar"
+              element={<TelaCadastro page={1}/>}
+            />
+            <Route
+              path="/avatar"
+              element={<TelaCadastro page={2}/>}
+            />
+            <Route 
+              path="/login" 
+              element={<TelaLogin page={1}/>} 
+            />
+            <Route 
+              path="/esqueceusenha" 
+              element={<TelaLogin page={2}/>} 
+            />
+            <Route 
+              path="/chatlista" 
+              element={<ChatScreen />} 
+            />
+            <Route 
+              path="/chaveUnica/:chaveUnica" 
+              element={localStorage.getItem("auth_key") ? <ChaveUnica /> : <TelaCadastro page={1}/>} 
+            />
+          </Routes>
+      </Router>
+    </StyledBody>
+  );
 } 
