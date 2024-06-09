@@ -1,5 +1,6 @@
 /* ChatList.module.css */
 .chatListContainer {
-    overflow-y: auto; /* Adiciona uma barra de rolagem vertical se necessário */
+    overflow-y: auto; 
     flex-grow: 1;
+    font-size: 20px;
 }

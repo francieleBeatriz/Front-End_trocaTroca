@@ -1,11 +1,13 @@
-// Molecules
-// SearchBar.tsx
 import React from 'react';
 import Input from '../atoms/Input';
 
 import searchIcon from "../../assets/images/search-icon.svg";
+
+import { StyledPesquisaContato } from '../../assets/styles/StyledComponents';
+import { StyledBotaoPesquisar } from '../../assets/styles/StyledComponents';
+import { StyledSelect } from '../../assets/styles/StyledComponents';
+import { StyledBotaoAdicionar } from '../../assets/styles/StyledComponents';
 import styles from "../../assets/styles/SearchBar.module.css";
-import Botao from '../atoms/Botao';
 
 interface SearchBarProps {
   placeholder: string;
@@ -21,18 +23,17 @@ export class SearchBar extends React.Component<SearchBarProps>
 {
     render(): React.ReactNode {
         return (
-        <div className={styles.searchBarContainer}>
-          <button className={styles.button} onClick={this.props.onSearch}>
-            <img src={searchIcon} alt="Search" className={styles.searchIcon} />
-          </button>
+        <StyledPesquisaContato>
+          <StyledBotaoPesquisar onClick={this.props.onSearch}>
+            <img src={searchIcon} alt="Search" />
+          </StyledBotaoPesquisar>
           <Input
             className={styles.inputText}
             placeholder={this.props.placeholder}
             value={this.props.value}
             onChange={this.props.onChange}
           />
-          <select
-            className={styles.inputSelect}
+          <StyledSelect
             value={this.props.selectedFilterOption}
             onChange={(e) => this.props.onFilterChange(e.target.value)}
           >
@@ -41,8 +42,8 @@ export class SearchBar extends React.Component<SearchBarProps>
                 {option}
               </option>
             ))}
-          </select>
-        </div>
+          </StyledSelect>
+        </StyledPesquisaContato>
         );
     }
 }

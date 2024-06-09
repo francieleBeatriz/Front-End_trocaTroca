@@ -106,9 +106,6 @@ export const StyledBotoesChave = styled.button<{ reverse?: boolean }>`
         margin-right: 3px;
     }
 `
-export const StyledBotaoLista = styled.button`
-    display: flex;
-`
 export const StyledDivBotoesChave = styled.div`
     display: flex;
     justify-content: space-between;
@@ -184,4 +181,84 @@ export const StyledImagemAvatar = styled.div`
     border: 2px solid black;
     overflow: hidden;
     margin: auto;
+`;
+
+/*Página de Lista de Chats*/
+export const StyledPesquisaContato = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #100f0f;
+    border-radius: 5px;
+    border: 2px solid  #F03A47;
+    border-radius: 10px;
+    margin-bottom: 5px;
+
+    @media (max-width: 768px) {
+        margin: 5px;
+    }
+`;
+export const StyledBotaoPesquisar = styled.button`
+    background-color: #F03A47;
+    border: none;
+    border-radius: 5px;
+    color: #100F0F;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+`;
+
+export const StyledSelect = styled.select`
+    color: #100f0f;
+    background-color: #F03A47;
+    font-size: 16px;
+    border: none;
+    font-weight: 800;
+    font-family: "Roboto Slab", serif;
+`;
+
+export const StyledBotaoLista = styled.button`
+    background-color: #F03A47;
+    border: none;
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-family: "Roboto Slab", serif;
+`
+export const StyledBotaoAdicionar = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 190px;
+    height: 40px;
+
+   font-size: 18px;
+   font-family: "Roboto Slab", serif;
+   background-color: #F03A47;
+   color: white;
+
+   border: none;
+   border-radius: 20px;
+
+   position: absolute;
+   bottom: 5px;
+
+   img {
+     margin-right: 5px;
+   }
+
+   @media (max-width: 768px) {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+   }
+`;
+
+export const StyledContainerChat = styled.div`
+    position: relative;
+    height: calc(100vh - 80px); 
+    margin-top: 50px;
 `;

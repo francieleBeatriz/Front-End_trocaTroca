@@ -4,7 +4,6 @@ import styles from "../../assets/styles/ChatItem.module.css";
 
 import iconePin from "../../assets/images/iconePin.svg";
 
-
 interface ChatItemProps {
   chat: string;
 }
