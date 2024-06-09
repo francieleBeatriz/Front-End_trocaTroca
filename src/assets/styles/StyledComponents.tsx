@@ -46,7 +46,7 @@ export const StyledFormulario = styled.div`
 
   @media (max-width: 768px) {
     padding: 20px;
-    border-radius: 5px;  // Borda menos proeminente.
+    border-radius: 5px; 
   }
 
   @media (max-width: 400px) {
@@ -70,30 +70,62 @@ export const StyledInput = styled.input`
     }
 `;
 
-export const StyledBotao = styled.button`
+export const StyledBotao = styled.button<{ reverse?: boolean }>`
     width: 30%;  
     min-height: 38px;  
     background-color: #0d0c0c;
     color: #F03A47;
     font-weight: bold;
-
     border: none;
     cursor: pointer;
-
     border-radius: 10px;
     margin-top: 10px;
     margin-left: auto;
-
     display: flex;             
     align-items: center;       
     justify-content: center;
-    font-family: "Roboto Slab", serif; 
+    font-family: "Roboto Slab", serif;
+    flex-direction: ${props => props.reverse ? 'row-reverse' : 'row'};
 
-    img{
-        margin-left: 5px
+    img {
+        margin-left: ${props => props.reverse ? '0' : '0'};
+        margin-right: ${props => props.reverse ? '5px' : '0'};
     }
 `;
+export const StyledBotoesChave = styled.button<{ reverse?: boolean }>`
+    display: flex;
+    flex-direction: ${props => props.reverse ? 'row-reverse' : 'row'};
+    align-items: center;
+    justify-content: center;
+    background-color: #F03A47;
+    border: none; 
+    cursor: pointer;
+    font-weight: 600;
 
+    img{
+        margin-right: 3px;
+    }
+`
+export const StyledBotaoLista = styled.button`
+    display: flex;
+`
+export const StyledDivBotoesChave = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+export const StyledInputChave = styled.textarea`
+  height: 130px;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  background-color: #F03A47;
+  border: 3px solid black;
+  outline: none;
+  font-size: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  resize: none;
+`
 export const StyledLabel = styled.p`
     font-size: 18px;
     font-weight: bold;
@@ -139,6 +171,7 @@ export const StyledTituloPagina = styled.div`
     font-size: 20px;
     font-weight: 800;
     color: ${props => props.color};
+    text-decoration: ${props => (props.underline ? 'underline' : 'none')};
 `;
 
 export const StyledImagemAvatar = styled.div`

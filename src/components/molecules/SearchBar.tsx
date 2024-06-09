@@ -5,6 +5,7 @@ import Input from '../atoms/Input';
 
 import searchIcon from "../../assets/images/search-icon.svg";
 import styles from "../../assets/styles/SearchBar.module.css";
+import Botao from '../atoms/Botao';
 
 interface SearchBarProps {
   placeholder: string;

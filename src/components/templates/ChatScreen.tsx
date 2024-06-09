@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { SearchBar } from '../molecules/SearchBar';
-import { ChatList } from '../organisms/ChatList';
+import { ChatList } from '../organisms/ChatLista';
+import Botao from '../atoms/Botao';
+import iconeAdicionar from '../../assets/images/iconeAdicionar.svg'
+import { StyledBotaoLista } from '../../assets/styles/StyledComponents';
 
 import styles from '../../assets/styles/ChatScreen.module.css';
 
@@ -28,7 +31,7 @@ export class ChatScreen extends Component<{}, ChatScreenState> {
 
   render() {
     const { searchValue, filterOption } = this.state;
-    const chats = ['Chat 1', 'Chat 2', 'Chat 3']; // Amostra de dados de chats
+    const chats = ['Nome do usuário', 'Nome do usuário', 'Nome do usuário'];
 
     return (
       <div className={styles.chatScreenContainer}>
@@ -41,7 +44,12 @@ export class ChatScreen extends Component<{}, ChatScreenState> {
           selectedFilterOption={filterOption}
           onFilterChange={this.handleFilterChange}
         />
-        <ChatList chats={chats} />
+        <StyledBotaoLista>
+          <Botao textoBotao="Conversas"/>
+          <Botao textoBotao="Grupos"/>
+        </StyledBotaoLista>
+          <ChatList chats={chats} />
+          <Botao textoBotao="Adicionar Contato" imgBotao={iconeAdicionar} reverse="true"/>
       </div>
     );
   }

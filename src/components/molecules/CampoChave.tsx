@@ -6,7 +6,7 @@ const CampoChave = () => {
   return (
     <div>
       <Label texto="Chave. " subtexto="chave única gerada para você"/>
-      <Input placeholder="digite aqui..."/>
+      <Input placeholder="digite aqui..." type="text"/>
     </div>
   );
 }

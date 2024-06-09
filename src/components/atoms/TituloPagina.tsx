@@ -4,11 +4,14 @@ import { StyledTituloPagina } from '../../assets/styles/StyledComponents';
 interface TituloPaginaProps {
     textoTitulo: string;
     cor: string;
+    underline: boolean;
 }
 
-const TituloPagina: React.FC<TituloPaginaProps> = ({ textoTitulo, cor }) => {
+const TituloPagina: React.FC<TituloPaginaProps> = ({ textoTitulo, cor, underline }) => {
     return (
-        <StyledTituloPagina style={{ color: cor }}>{textoTitulo}</StyledTituloPagina>
+        <StyledTituloPagina color={cor} underline={underline}>
+            {textoTitulo}
+        </StyledTituloPagina>
     );
 }
 

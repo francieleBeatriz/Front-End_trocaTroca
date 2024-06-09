@@ -4,7 +4,7 @@ import styles from "../../assets/styles/ChatList.module.css";
 import { ChatItem } from '../molecules/ChatItem';
 
 interface ChatListProps {
-  chats: string[]; // Assuming chats are represented by strings for simplicity
+  chats: string[]; 
 }
 
 export class ChatList extends React.Component<ChatListProps> 

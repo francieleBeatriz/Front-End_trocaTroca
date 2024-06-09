@@ -3,8 +3,10 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #F03A47;
+  background-color: #100f0f;
   border-radius: 5px;
+  border: 2px solid  #F03A47;
+  border-radius: 10px;
 }
 
 .inputText {

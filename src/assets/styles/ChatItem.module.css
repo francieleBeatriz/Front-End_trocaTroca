@@ -1,20 +1,20 @@
-.chatContainer{
+.containerChat {
     background-color: #F03A47;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    
+    padding: 10px;
     margin: 5px;
     border-radius: 15px;
-    padding: 10px;
 }
-.profile{
+
+.perfil {
     width: 32px;
     height: 32px;
     background-color: #0d0c0c;
     border-radius: 50%;
-    
+    margin-right: 10px;  
 }
-.chatName{
-    text-align: right;
+
+.nomeChat {
+    flex-grow: 1;   
 }

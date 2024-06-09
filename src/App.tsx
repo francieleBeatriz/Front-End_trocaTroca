@@ -11,6 +11,7 @@ import Cadastrar from './components/organisms/Cadastrar';
 import Avatar from "./components/organisms/Avatar";
 import Login from "./components/organisms/Login";
 import EsqueceuSenha from "./components/organisms/EsqueceuSenha";
+import ChaveUnica from "./components/organisms/ChaveUnica";
 
 import { ChatScreen } from "./components/templates/ChatScreen";
 
@@ -30,10 +31,6 @@ export function App()
                 path="/avatar"
                 element={<Avatar />}
               />
-              <Route
-                path="/chats"
-                element={<ChatScreen />}
-              />
               <Route 
                 path="/login" 
                 element={<Login />} 
@@ -43,8 +40,12 @@ export function App()
                 element={<EsqueceuSenha />} 
               />
               <Route 
-                path="/chatlist" 
+                path="/chatlista" 
                 element={<ChatScreen />} 
+              />
+              <Route 
+                path="/chaveunica" 
+                element={<ChaveUnica />} 
               />
             </Routes>
         </Router>
