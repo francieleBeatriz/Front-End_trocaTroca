@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { SearchBar } from '../molecules/SearchBar';
 import { ChatList } from '../organisms/ChatLista';
-import Botao from '../atoms/Botao';
-import iconeAdicionar from '../../assets/images/iconeAdicionar.svg'
-import { StyledBotaoLista } from '../../assets/styles/StyledComponents';
-
+import BotaoLista from '../atoms/BotaoLista';
+import iconeAdicionar from '../../assets/images/iconeAdicionar.svg';
+import { StyledBotaoLista, StyledBotaoAdicionar, StyledContainerChat } from '../../assets/styles/StyledComponents';
 import styles from '../../assets/styles/ChatScreen.module.css';
 
 interface ChatScreenState {
   searchValue: string;
   filterOption: string;
+  selectedTab: string;
 }
 
 export class ChatScreen extends Component<{}, ChatScreenState> {
@@ -18,6 +18,7 @@ export class ChatScreen extends Component<{}, ChatScreenState> {
     this.state = {
       searchValue: '',
       filterOption: 'Existing',
+      selectedTab: 'Conversas',
     };
   }
 
@@ -29,14 +30,18 @@ export class ChatScreen extends Component<{}, ChatScreenState> {
     this.setState({ filterOption: option });
   };
 
+  handleTabChange = (tab: string) => {
+    this.setState({ selectedTab: tab });
+  };
+
   render() {
-    const { searchValue, filterOption } = this.state;
-    const chats = ['Nome do usuário', 'Nome do usuário', 'Nome do usuário'];
+    const { searchValue, filterOption, selectedTab } = this.state;
+    const chats = ['Nome do usuário', 'Nome do usuário'];
 
     return (
-      <div className={styles.chatScreenContainer}>
+      <StyledContainerChat>
         <SearchBar
-          placeholder="Search"
+          placeholder="Buscar Usuário"
           value={searchValue}
           onChange={(e) => this.setState({ searchValue: e.target.value })}
           onSearch={this.handleSearch}
@@ -44,14 +49,21 @@ export class ChatScreen extends Component<{}, ChatScreenState> {
           selectedFilterOption={filterOption}
           onFilterChange={this.handleFilterChange}
         />
-        <StyledBotaoLista>
-          <Botao textoBotao="Conversas"/>
-          <Botao textoBotao="Grupos"/>
+        <StyledBotaoLista onClick={() => this.handleTabChange('Conversas')}>
+          <BotaoLista textoBotao="Conversas" cor={selectedTab === 'Conversas' ? 'white' : '#6a2025'} />
         </StyledBotaoLista>
-          <ChatList chats={chats} />
-          <Botao textoBotao="Adicionar Contato" imgBotao={iconeAdicionar} reverse="true"/>
-      </div>
+        <StyledBotaoLista onClick={() => this.handleTabChange('Grupos')}>
+          <BotaoLista textoBotao="Grupos" cor={selectedTab === 'Grupos' ? 'white' : '#6a2025'} />
+        </StyledBotaoLista>
+          
+        <ChatList chats={chats} />
+
+          <StyledBotaoAdicionar>
+            <BotaoLista cor="white" textoBotao="Adicionar Contato" imgBotao={iconeAdicionar} reverse={true} />
+          </StyledBotaoAdicionar>
+      </StyledContainerChat>
     );
   }
 }
 
+export default ChatScreen;

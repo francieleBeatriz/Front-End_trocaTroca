@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab:wght@100..900&display=swap');
 .containerChat {
     background-color: #F03A47;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 5px;
+    margin: 10px;
     border-radius: 15px;
 }
 
@@ -16,5 +17,6 @@
 }
 
 .nomeChat {
+    font-family: "Roboto Slab", serif;
     flex-grow: 1;   
 }
