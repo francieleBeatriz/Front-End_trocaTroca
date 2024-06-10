@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 
 import Menu from '../molecules/Menu';
 import CampoAvatar from '../molecules/CampoAvatar';
@@ -9,13 +9,21 @@ import { StyledFormulario } from '../../assets/styles/StyledComponents';
 
 import iconeSalvar from '../../assets/images/iconeSalvar.svg';
 
+import { TelaCadastroContext } from '../templates/TelaCadastro';
+
 const Avatar = () => {
+  const { setCaminhoFoto, cadastrarUsuario } = useContext(TelaCadastroContext);
+
   return (
     <StyledFormulario>
       <Menu />
       <CampoAvatar />
       <ImagemAvatar />
-      <Botao textoBotao="SALVAR" imgBotao={iconeSalvar} reverse/>
+      <Botao 
+      textoBotao="SALVAR" 
+      imgBotao={iconeSalvar}  
+      onClick={cadastrarUsuario} 
+      reverse/>
     </StyledFormulario>
   );
 }

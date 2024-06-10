@@ -3,9 +3,11 @@ import { StyledInputChave } from '../../assets/styles/StyledComponents';
 
 interface InputChaveProps {
   type?: string;
+  value?: string;
+  onChange?: any
 }
 
-const InputChave: React.FC<InputChaveProps> = ({ type }) => {
+const InputChave: React.FC<InputChaveProps> = ({ type = "password" , value = "daslfjadslkjf", onChange}) => {
   const [text, setText] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -15,8 +17,9 @@ const InputChave: React.FC<InputChaveProps> = ({ type }) => {
 
   return (
     <StyledInputChave
-      value={type === 'password' ? text.replace(/./g, '*') : text}
-      onChange={handleChange}
+      type={type}
+      value={value}
+      onChange={onChange}
     />
   );
 };

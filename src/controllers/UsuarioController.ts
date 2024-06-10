@@ -1,19 +1,73 @@
 import { UserModel } from "../models/UserModel";
 
-export class UsuarioController
+export class UsuarioController 
 {
     public static async criarUsuario(
-        apelido: string, 
-        senha: string, 
-        confirmarSenha: string 
-    )
+        apelido: string,
+        senha: string,
+        confirmarSenha: string,
+        caminhoFoto: string
+    ) 
     {
-        const RESPONSE  = await UserModel.criarUsuario(
+        const RESPOSTA = await UserModel.criarUsuario(
             apelido,
             senha,
             confirmarSenha
         );
 
-        console.log(RESPONSE);
+        if (this.verificaResposta(RESPOSTA)) {
+            alert("Por favor, preencha  ou verifique os campos!");
+            return RESPOSTA;
+        }
+
+        const CHAVE_UNICA = RESPOSTA["chaveUnica"];
+        const AUTH_KEY = RESPOSTA["authKey"];
+
+        localStorage.setItem("auth_key", AUTH_KEY);
+
+        return CHAVE_UNICA;
+    }
+
+    public static async logarUsuario(apelido: string, senha: string)
+    {
+        const RESPOSTA = await UserModel.logarUsuario(apelido, senha);
+
+        if(this.verificaResposta(RESPOSTA)) {
+            alert("Por favor, preencha  ou verifique os campos!");
+            return RESPOSTA;
+        }
+
+        const AUTH_KEY = RESPOSTA["authKey"];
+        localStorage.setItem("auth_key", AUTH_KEY);
+
+        return {
+            "codigo": 200,
+            "mensagem": "Usuário logado com sucesso!"
+        };
+            
+    }
+
+    public static async esqueceuAsenha(
+        chaveUnica: string,
+        senha: string
+    )
+    {
+        const RESPOSTA = UserModel.esqueceuAsenha(chaveUnica, senha);
+
+        if(this.verificaResposta(RESPOSTA))
+        {
+            alert("Por favor, preencha  ou verifique os campos!");
+            return RESPOSTA;
+        }
+
+        return {
+            "codigo": 200,
+            "mensagem": "A senha foi alterada com sucesso!"
+        };
+    }
+
+    private static verificaResposta(resposta: Object)
+    {
+        return resposta.hasOwnProperty("erro");
     }
 }

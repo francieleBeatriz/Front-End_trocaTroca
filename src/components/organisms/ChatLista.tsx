@@ -4,7 +4,7 @@ import styles from "../../assets/styles/ChatList.module.css";
 import { ChatItem } from '../molecules/ChatItem';
 
 interface ChatListProps {
-  chats: string[]; 
+  chats: { id: number; name: string; }[];
 }
 
 export class ChatList extends React.Component<ChatListProps> 
@@ -13,7 +13,7 @@ export class ChatList extends React.Component<ChatListProps>
         return (
           <div className={styles.chatListContainer}>
               {this.props.chats.map((chat) => (
-                <ChatItem key={chat} chat={chat}></ChatItem>
+                <ChatItem key={chat.id} chat={chat.name}></ChatItem>
               ))}
           </div>
         );
