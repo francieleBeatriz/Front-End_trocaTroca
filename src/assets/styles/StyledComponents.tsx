@@ -87,6 +87,11 @@ export const StyledInput = styled.input`
 export const StyledBotao = styled.button<{ reverse?: boolean }>`
     width: 30%;  
     min-height: 38px;  
+
+    display: flex;             
+    align-items: center;       
+    justify-content: center;
+
     background-color: #0d0c0c;
     color: #F03A47;
     font-weight: bold;
@@ -95,9 +100,7 @@ export const StyledBotao = styled.button<{ reverse?: boolean }>`
     border-radius: 10px;
     margin-top: 10px;
     margin-left: auto;
-    display: flex;             
-    align-items: center;       
-    justify-content: center;
+    
     font-family: "Roboto Slab", serif;
     flex-direction: ${props => props.reverse ? 'row-reverse' : 'row'};
 

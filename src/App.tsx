@@ -12,6 +12,7 @@ import Avatar from "./components/organisms/Avatar";
 import Login from "./components/organisms/Login";
 import EsqueceuSenha from "./components/organisms/EsqueceuSenha";
 import ChaveUnica from "./components/organisms/ChaveUnica";
+import ChatConversas from "./components/organisms/ChatConversas";
 
 import { ChatScreen } from "./components/templates/ChatScreen";
 import { TelaCadastro } from "./components/templates/TelaCadastro";
@@ -54,6 +55,10 @@ export function App()
               path="/chaveUnica/:chaveUnica" 
               element={localStorage.getItem("auth_key") ? <ChaveUnica /> : <TelaCadastro page={1}/>} 
             />
+            <Route 
+                path="/chatConversa" 
+                element={<ChatConversas />} 
+              />
           </Routes>
       </Router>
     </StyledBody>
