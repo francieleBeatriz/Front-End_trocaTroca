@@ -205,16 +205,24 @@ export const StyledImagemAvatar = styled.div<ImagemAvatarProps>`
     margin-left: 5px;
     margin-top: 5px;
     cursor: pointer;
+
 `;
 export const StyledDivImagemAvatar = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 100px;
+    margin-bottom: 15px;
+
+    @media (max-width: 400px) {
+        margin-top: 140px;
+        justify-content: center;
+    }
 `;
 export const StyledImagemEscolhida = styled.div`
-   width: 82px; 
+    width: 82px; 
     height: 82px;
+
     border-radius: 50%;
     background-image: url(${props => props.image});
     background-size: cover;
