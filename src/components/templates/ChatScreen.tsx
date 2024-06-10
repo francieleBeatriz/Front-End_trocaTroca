@@ -3,7 +3,7 @@ import { SearchBar } from '../molecules/SearchBar';
 import { ChatList } from '../organisms/ChatLista';
 import BotaoLista from '../atoms/BotaoLista';
 import iconeAdicionar from '../../assets/images/iconeAdicionar.svg';
-import { StyledBotaoLista, StyledBotaoAdicionar, StyledContainerChat } from '../../assets/styles/StyledComponents';
+import { StyledBotaoLista, StyledBotaoAdicionar, StyledContainerChat, StyledDivSepara } from '../../assets/styles/StyledComponents';
 import styles from '../../assets/styles/ChatScreen.module.css';
 
 import { ModalAdicionarContato } from '../organisms/ModalAdicionarContato';
@@ -40,20 +40,29 @@ export const ChatScreen = () => {
           onFilterChange={handleFilterChange}
         />
 
-        <BotaoLista textoBotao="Conversas" cor={selectedTab === 'Conversas' ? 'white' : '#6a2025'} />
-        <BotaoLista textoBotao="Grupos" cor={selectedTab === 'Grupos' ? 'white' : '#6a2025'} />
+      <StyledDivSepara>
+        <StyledBotaoLista active={selectedTab === 'Conversas'} onClick={() => handleTabChange('Conversas')}>
+            Conversas
+        </StyledBotaoLista>
+        
+        <StyledBotaoLista active={selectedTab === 'Grupos'} onClick={() => handleTabChange('Grupos')}>
+            Grupos
+        </StyledBotaoLista>
+      </StyledDivSepara>
 
         <ChatList chats={chats.map((chat, index) => ({ id: index, name: chat }))} />
         
-        <BotaoLista
-          cor="white"
-          textoBotao="Adicionar Contato"
-          imgBotao={iconeAdicionar}
-          onClick={() => setAbrirModalAdicionarContato(true)}
-          reverse={true}
-        />
+        <StyledBotaoAdicionar>
+          <BotaoLista
+            cor="white"
+            textoBotao="Adicionar Contato"
+            imgBotao={iconeAdicionar}
+            onClick={() => setAbrirModalAdicionarContato(true)}
+            reverse={true}
+          />
+        </StyledBotaoAdicionar>
         
-      { abrirModalAdicionarContato && <ModalAdicionarContato></ModalAdicionarContato> }
+        {abrirModalAdicionarContato && <ModalAdicionarContato onClose={() => setAbrirModalAdicionarContato(false)} />}
       </StyledContainerChat>
   );
 };
