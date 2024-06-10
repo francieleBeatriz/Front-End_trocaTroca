@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+const BLACK = "#100F0F";
+
 export const StyledBody = styled.div`
     display: flex;
     justify-content: center;
@@ -275,3 +277,78 @@ export const StyledContainerChat = styled.div`
     height: calc(100vh - 80px); 
     margin-top: 50px;
 `;
+
+export const StyledContainerModalAdicionar = styled.div`
+    position: fixed; /* ou absolute, dependendo do layout */
+
+    top: 0;
+    left: 0;
+
+    z-index: 9999;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    background-color: rgba(16, 15, 15, 0.95); /* Adicione um fundo semi-transparente para destacar a div */
+`
+
+
+export const StyledSpanImportantAdicionarContato = styled.span`
+    font-weight: 700;
+`
+
+export const StyledSpanAdicionarContato = styled.span`
+    
+`
+export const StyledLabelAdicionarContato = styled.label`
+    color: #F03A47;
+
+    display: flex;
+    flex-direction: column;
+    
+    justify-items: center;
+`
+
+export const StyledInputAdicionarContato = styled.input`
+    width: 200px;
+    height: 32px;
+
+    font-family: "Roboto Slab", serif;
+
+    background: transparent;
+
+    color: #F03A47;
+    
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #F03A47;
+
+    outline: none;
+
+    font-size: 20px;
+
+    &::placeholder {
+        font-size: 15px;
+        color: #F03A47;
+        font-family: "Roboto Slab", serif;
+    }
+`
+
+export const StyledBotaoAdicionarContato = styled.button`
+    width: 40px;
+    height: 32px;
+
+    background-color: #F03A47;
+
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+
+    cursor: pointer;
+`

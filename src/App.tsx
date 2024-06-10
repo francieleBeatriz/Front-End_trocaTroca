@@ -16,6 +16,7 @@ import ChaveUnica from "./components/organisms/ChaveUnica";
 import { ChatScreen } from "./components/templates/ChatScreen";
 import { TelaCadastro } from "./components/templates/TelaCadastro";
 import { TelaLogin } from "./components/templates/TelaLogin";
+import SearchModal from "./components/organisms/SearchModal";
 
 export function App()
 {
@@ -42,11 +43,11 @@ export function App()
               element={<TelaLogin page={1}/>} 
             />
             <Route 
-              path="/esqueceusenha" 
+              path="/esqueceuAsenha" 
               element={<TelaLogin page={2}/>} 
             />
             <Route 
-              path="/chatlista" 
+              path="/chatLista" 
               element={<ChatScreen />} 
             />
             <Route 

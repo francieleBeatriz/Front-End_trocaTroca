@@ -47,6 +47,25 @@ export class UsuarioController
             
     }
 
+    public static async esqueceuAsenha(
+        chaveUnica: string,
+        senha: string
+    )
+    {
+        const RESPOSTA = UserModel.esqueceuAsenha(chaveUnica, senha);
+
+        if(this.verificaResposta(RESPOSTA))
+        {
+            alert("Por favor, preencha  ou verifique os campos!");
+            return RESPOSTA;
+        }
+
+        return {
+            "codigo": 200,
+            "mensagem": "A senha foi alterada com sucesso!"
+        };
+    }
+
     private static verificaResposta(resposta: Object)
     {
         return resposta.hasOwnProperty("erro");

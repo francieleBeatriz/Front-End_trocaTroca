@@ -51,6 +51,8 @@ export function TelaCadastro({page}: {page: number})
                 return;
             }
 
+            alert("Usuário cadastrado com sucesso!");
+
             const CHAVE_UNICA = response; // Altere CHAVE_UNICA para o nome correto da chave
             navegarPara(`/chaveUnica/${CHAVE_UNICA}`);
         } catch (error) {

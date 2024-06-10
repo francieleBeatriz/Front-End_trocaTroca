@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { SearchBar } from '../molecules/SearchBar';
 import { ChatList } from '../organisms/ChatLista';
 import BotaoLista from '../atoms/BotaoLista';
@@ -6,64 +6,56 @@ import iconeAdicionar from '../../assets/images/iconeAdicionar.svg';
 import { StyledBotaoLista, StyledBotaoAdicionar, StyledContainerChat } from '../../assets/styles/StyledComponents';
 import styles from '../../assets/styles/ChatScreen.module.css';
 
-interface ChatScreenState {
-  searchValue: string;
-  filterOption: string;
-  selectedTab: string;
-}
+import { ModalAdicionarContato } from '../organisms/ModalAdicionarContato';
 
-export class ChatScreen extends Component<{}, ChatScreenState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      searchValue: '',
-      filterOption: 'Existing',
-      selectedTab: 'Conversas',
-    };
-  }
+export const ChatScreen = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const [filterOption, setFilterOption] = useState('Existing');
+  const [selectedTab, setSelectedTab] = useState('Conversas');
+  const [abrirModalAdicionarContato, setAbrirModalAdicionarContato] = useState(false);
 
-  handleSearch = () => {
+  const handleSearch = () => {
     // Lógica para pesquisa
   };
 
-  handleFilterChange = (option: string) => {
-    this.setState({ filterOption: option });
+  const handleFilterChange = (option: string) => {
+    setFilterOption(option);
   };
 
-  handleTabChange = (tab: string) => {
-    this.setState({ selectedTab: tab });
+  const handleTabChange = (tab: string) => {
+    setSelectedTab(tab);
   };
 
-  render() {
-    const { searchValue, filterOption, selectedTab } = this.state;
-    const chats = ['Nome do usuário', 'Nome do usuário'];
+  const chats = ['Nome do usuário', 'Nome do usuário'];
 
-    return (
+  return (
       <StyledContainerChat>
         <SearchBar
           placeholder="Buscar Usuário"
           value={searchValue}
-          onChange={(e) => this.setState({ searchValue: e.target.value })}
-          onSearch={this.handleSearch}
+          onChange={(e) => setSearchValue(e.target.value)}
+          onSearch={handleSearch}
           filterOptions={['Contatos', 'Usuários']}
           selectedFilterOption={filterOption}
-          onFilterChange={this.handleFilterChange}
+          onFilterChange={handleFilterChange}
         />
-        <StyledBotaoLista onClick={() => this.handleTabChange('Conversas')}>
-          <BotaoLista textoBotao="Conversas" cor={selectedTab === 'Conversas' ? 'white' : '#6a2025'} />
-        </StyledBotaoLista>
-        <StyledBotaoLista onClick={() => this.handleTabChange('Grupos')}>
-          <BotaoLista textoBotao="Grupos" cor={selectedTab === 'Grupos' ? 'white' : '#6a2025'} />
-        </StyledBotaoLista>
-          
-        <ChatList chats={chats} />
 
-          <StyledBotaoAdicionar>
-            <BotaoLista cor="white" textoBotao="Adicionar Contato" imgBotao={iconeAdicionar} reverse={true} />
-          </StyledBotaoAdicionar>
+        <BotaoLista textoBotao="Conversas" cor={selectedTab === 'Conversas' ? 'white' : '#6a2025'} />
+        <BotaoLista textoBotao="Grupos" cor={selectedTab === 'Grupos' ? 'white' : '#6a2025'} />
+
+        <ChatList chats={chats.map((chat, index) => ({ id: index, name: chat }))} />
+        
+        <BotaoLista
+          cor="white"
+          textoBotao="Adicionar Contato"
+          imgBotao={iconeAdicionar}
+          onClick={() => setAbrirModalAdicionarContato(true)}
+          reverse={true}
+        />
+        
+      { abrirModalAdicionarContato && <ModalAdicionarContato></ModalAdicionarContato> }
       </StyledContainerChat>
-    );
-  }
-}
+  );
+};
 
 export default ChatScreen;

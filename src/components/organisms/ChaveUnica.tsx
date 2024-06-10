@@ -21,7 +21,7 @@ const ChaveUnica = () => {
   const [ text, setText ] = useState("Copiar");
 
   const handleClose = () => {
-    navigate('/chatlista'); 
+    navigate('/chatLista'); 
   };
 
   const handleTypeInput = () => {

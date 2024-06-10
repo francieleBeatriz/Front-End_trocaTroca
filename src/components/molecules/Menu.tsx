@@ -10,20 +10,30 @@ import IconeInformacoes from '../../assets/images/pessoaInformacoes.svg';
 import IconeAvatar from '../../assets/images/iconeAvatar.svg';
 import IconeCadeado from '../../assets/images/iconeCadeado.svg';
 
+type NavItem = {
+  title: string;
+  icon: string;
+  path: string;
+};
+
+type NavItemsMap = {
+  [key: string]: NavItem[];
+};
+
 const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isActive = (path: any) => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path;
 
-  const navItems = {
+  const navItems: NavItemsMap = {
     '/login': [
       { title: 'ENTRAR', icon: IconeInformacoes, path: '/login' },
-      { title: 'ESQUECEU A SENHA?', icon: IconeCadeado, path: '/esqueceusenha' }
+      { title: 'ESQUECEU A SENHA?', icon: IconeCadeado, path: '/esqueceuAsenha' }
     ],
-    '/esqueceusenha': [
+    '/esqueceuAsenha': [
       { title: 'ENTRAR', icon: IconeInformacoes, path: '/login' },
-      { title: 'ESQUECEU A SENHA?', icon: IconeCadeado, path: '/esqueceusenha' }
+      { title: 'ESQUECEU A SENHA?', icon: IconeCadeado, path: '/esqueceuAsenha' }
     ],
     '/avatar': [
       { title: 'CADASTRAR', icon: IconeInformacoes, path: '/cadastrar' },
@@ -42,14 +52,13 @@ const Menu = () => {
       {items.map(item => (
         <StyledNavItem key={item.path} onClick={() => navigate(item.path)}>
           <IconePagina 
-          iconePagina={item.icon}
-           filter={isActive(item.path) ? "brightness(0) invert(1)" : "brightness(0) saturate(100%) invert(18%) sepia(11%) saturate(6887%) hue-rotate(322deg) brightness(92%) contrast(97%)"}
-           />
-
+            iconePagina={item.icon} 
+            filter={isActive(item.path) ? "brightness(0) invert(1)" : "brightness(0) saturate(100%) invert(18%) sepia(11%) saturate(6887%) hue-rotate(322deg) brightness(92%) contrast(97%)"}
+          />
           <TituloPagina 
-          textoTitulo={item.title} 
-          cor={isActive(item.path) ? "white" : "#6a2025"} 
-          underline={isActive(item.path)}
+            textoTitulo={item.title} 
+            cor={isActive(item.path) ? "white" : "#6a2025"} 
+            underline={isActive(item.path)}
           />
         </StyledNavItem>
       ))}
