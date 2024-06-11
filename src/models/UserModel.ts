@@ -9,7 +9,8 @@ export class UserModel {
     public static async criarUsuario(
         apelido: string,
         senha: string,
-        confirmarSenha: string
+        confirmarSenha: string,
+        caminhoFoto: string
     ) {
         if (!apelido || !senha || !confirmarSenha) return { erro: -1 };
 
@@ -25,7 +26,7 @@ export class UserModel {
                 body: JSON.stringify({
                     "apelido": apelido,
                     "senha": senha,
-                    "caminhoFoto": "/imagems/profile_1.jpeg"
+                    "caminhoFoto": caminhoFoto
                 })
             }
         );

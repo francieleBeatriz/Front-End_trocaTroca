@@ -188,19 +188,50 @@ export const StyledTituloPagina = styled.div`
     color: ${props => props.color};
     text-decoration: ${props => (props.underline ? 'underline' : 'none')};
 `;
+interface ImagemAvatarProps {
+    image: string; 
+}
+export const StyledImagemAvatar = styled.div<ImagemAvatarProps>`
+    width: 60px; 
+    height: 60px; 
 
-export const StyledImagemAvatar = styled.div`
-    display: flex;
-    align-itens: center;
-    justify-content: center;
-    width: 82px;
-    height: 82px;
     border-radius: 50%;
     border: 2px solid black;
-    overflow: hidden;
-    margin: auto;
-`;
 
+    background-color: #100f0f;
+    background-size: cover;
+    background-position: center;
+    background-image: url(${props => props.image});
+    margin-left: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+
+`;
+export const StyledDivImagemAvatar = styled.div`
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    margin-bottom: 15px;
+
+    @media (max-width: 400px) {
+        margin-top: 140px;
+        justify-content: center;
+    }
+`;
+export const StyledImagemEscolhida = styled.div`
+    width: 82px; 
+    height: 82px;
+
+    border-radius: 50%;
+    background-image: url(${props => props.image});
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
 /*Página de Lista de Chats*/
 export const StyledPesquisaContato = styled.div`
     display: flex;
@@ -235,16 +266,25 @@ export const StyledSelect = styled.select`
     font-family: "Roboto Slab", serif;
 `;
 
-export const StyledBotaoLista = styled.button`
-    background-color: #F03A47;
+export const StyledBotaoLista = styled.div<{ active?: boolean }>`
+    background-color: ${({ active }) => active ? '#F03A47' : '#F03A47'};
+    color: ${({ active }) => active ? 'white' : '#6a2025'};
+    
     border: none;
-    width: 120px;
-    height: 40px;
+    width: 100px;
+    height: 35px;
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
     font-family: "Roboto Slab", serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+export const StyledDivSepara = styled.div`
+    display: flex;
 `
 export const StyledBotaoAdicionar = styled.button`
     display: flex;
@@ -261,8 +301,9 @@ export const StyledBotaoAdicionar = styled.button`
    border: none;
    border-radius: 20px;
 
-   position: absolute;
-   bottom: 5px;
+    position: fixed;  
+    bottom: 20px;
+
 
    img {
      margin-right: 5px;
@@ -273,6 +314,9 @@ export const StyledBotaoAdicionar = styled.button`
       bottom: 5px;
       right: 10px;
    }
+   @media (min-width: 768px) {
+      left: 52%;
+   }
 `;
 
 export const StyledContainerChat = styled.div`
@@ -282,8 +326,7 @@ export const StyledContainerChat = styled.div`
 `;
 
 export const StyledContainerModalAdicionar = styled.div`
-    position: fixed; /* ou absolute, dependendo do layout */
-
+    position: fixed; 
     top: 0;
     left: 0;
 
@@ -352,6 +395,8 @@ export const StyledBotaoAdicionarContato = styled.button`
     border: none;
     border-radius: 5px;
     padding: 5px;
+    margin-top: 2px;
 
     cursor: pointer;
+
 `

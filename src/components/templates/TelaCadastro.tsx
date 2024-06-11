@@ -35,10 +35,11 @@ export function TelaCadastro({page}: {page: number})
     const [ apelido, setApelido ] = useState<string>("");
     const [ senha, setSenha ] = useState<string>("");
     const [ confirmaSenha, setConfirmaSenha ] = useState<string>("");
-    const [ caminhoFoto, setCaminhoFoto ] = useState<string>("/imagems/profile_1.jpg");
+    const [ caminhoFoto, setCaminhoFoto ] = useState<string>("");
 
     const cadastrarUsuario = async () => { 
         try {
+            console.log(caminhoFoto);
             const response: any = await UsuarioController.criarUsuario( // Altere any para o tipo correto do retorno
                 apelido,
                 senha,

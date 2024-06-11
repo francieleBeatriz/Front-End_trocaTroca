@@ -12,7 +12,8 @@ export class UsuarioController
         const RESPOSTA = await UserModel.criarUsuario(
             apelido,
             senha,
-            confirmarSenha
+            confirmarSenha,
+            caminhoFoto
         );
 
         if (this.verificaResposta(RESPOSTA)) {

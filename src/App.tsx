@@ -51,9 +51,9 @@ export function App()
               element={localStorage.getItem("auth_key") ? <ChaveUnica /> : <TelaCadastro page={1}/>} 
             />
             <Route 
-                path="/chatConversa" 
-                element={<ChatConversas />} 
-              />
+              path="/chatConversa" 
+              element={<ChatConversas />} 
+            />
           </Routes>
       </Router>
     </StyledBody>
