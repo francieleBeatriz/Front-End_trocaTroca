@@ -15,11 +15,28 @@ import { ModalAdicionarContato } from '../organisms/ModalAdicionarContato';
 import { UsuarioController } from '../../controllers/UsuarioController';
 import { useNavigate } from 'react-router-dom';
 
+import SearchModal from '../organisms/SearchModal';
+
+const contacts = [
+  'Alice',
+  'Fran',
+  'Pablio',
+  'Aurora',
+  'Alvaro',
+  'Fabricio',
+  'Grace',
+  'Hank',
+  'Ivy',
+  'Jack',
+];
+
 export const ChatScreen = () => {
-  const [ searchValue, setSearchValue ] = useState('');
-  const [ filterOption, setFilterOption ] = useState('Existing');
-  const [ selectedTab, setSelectedTab ] = useState('Conversas');
-  const [ abrirModalAdicionarContato, setAbrirModalAdicionarContato ] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [filterOption, setFilterOption] = useState('Contatos');
+  const [selectedTab, setSelectedTab] = useState('Conversas');
+  const [abrirModalAdicionarContato, setAbrirModalAdicionarContato] = useState(false);
+  const [abrirModalPesquisarContato, setAbrirModalPesquisarContato] = useState(false);
+
   const [ contato, setContato ] = useState("");
 
   const [chats, setChats] = useState<any[]>([]);
@@ -47,10 +64,10 @@ export const ChatScreen = () => {
     }
 
     UsuarioController.iniciarMonitoramento(USUARIO, CAMINHO, adicionarContatoALista);
-  }, []); // Array de dependências vazio para garantir que seja executado apenas uma vez
+  }, []); /
 
   const handleSearch = () => {
-    // Lógica para pesquisa
+    setAbrirModalPesquisarContato(true);
   };
 
   const handleFilterChange = (option: string) => {
@@ -73,15 +90,23 @@ export const ChatScreen = () => {
 
   return (
     <StyledContainerChat>
-      <SearchBar
-        placeholder="Buscar Usuário"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        onSearch={handleSearch}
-        filterOptions={['Contatos', 'Usuários']}
-        selectedFilterOption={filterOption}
-        onFilterChange={handleFilterChange}
-      />
+      {!abrirModalPesquisarContato ? (
+        <SearchBar
+          placeholder="Buscar Usuário"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          onSearch={handleSearch}
+          filterOptions={['Contatos', 'Usuários']}
+          selectedFilterOption={filterOption}
+          onFilterChange={handleFilterChange}
+        />
+      ) : (
+        <SearchModal 
+          onClose={() => setAbrirModalPesquisarContato(false)} 
+          contacts={contacts}
+          initialSearchValue={searchValue}
+        />
+      )}
 
       <StyledDivSepara>
         <StyledBotaoLista active={selectedTab === 'Conversas'} onClick={() => handleTabChange('Conversas')}>

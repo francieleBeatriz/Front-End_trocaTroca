@@ -6,7 +6,7 @@ import searchIcon from "../../assets/images/search-icon.svg";
 import { StyledPesquisaContato } from '../../assets/styles/StyledComponents';
 import { StyledBotaoPesquisar } from '../../assets/styles/StyledComponents';
 import { StyledSelect } from '../../assets/styles/StyledComponents';
-import { StyledBotaoAdicionar } from '../../assets/styles/StyledComponents';
+
 import styles from "../../assets/styles/SearchBar.module.css";
 
 interface SearchBarProps {
