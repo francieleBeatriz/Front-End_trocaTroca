@@ -7,17 +7,12 @@ import { StyledBody } from "./assets/styles/StyledComponents";
 
 import LogoTrocaTroca from './components/atoms/LogoTrocaTroca';
 
-import Cadastrar from './components/organisms/Cadastrar';
-import Avatar from "./components/organisms/Avatar";
-import Login from "./components/organisms/Login";
-import EsqueceuSenha from "./components/organisms/EsqueceuSenha";
 import ChaveUnica from "./components/organisms/ChaveUnica";
 import ChatConversas from "./components/organisms/ChatConversas";
 
 import { ChatScreen } from "./components/templates/ChatScreen";
 import { TelaCadastro } from "./components/templates/TelaCadastro";
 import { TelaLogin } from "./components/templates/TelaLogin";
-import SearchModal from "./components/organisms/SearchModal";
 
 export function App()
 {

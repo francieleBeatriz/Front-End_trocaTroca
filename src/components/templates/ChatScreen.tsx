@@ -26,15 +26,22 @@ export const ChatScreen = () => {
     const USUARIO = localStorage.getItem("usuario") ?? "";
     const CAMINHO = 'chats';
 
-    const adicionarContatoALista = (data: any) => {
-      if (!data) {
+    const adicionarContatoALista = (chaves: any, participantes?: any) => {
+      if (!chaves || !participantes) {
         
         return;
       }
-      console.log(data);
-      const usuariosArray: any[] = data.map((item: any) => Object.keys(item.participantes));
+      console.log(chaves);
+      const ARRAY_USUARIOS:any = {};
 
-      setChats(usuariosArray);
+      for( let i = 0; i < chaves.length; i++)
+      {
+        ARRAY_USUARIOS["id"] = chaves[i];
+        ARRAY_USUARIOS["nome"] = Object.values(participantes[i])[0];
+      }
+
+      console.log(ARRAY_USUARIOS);
+      //setChats(usuariosArray);
     }
 
     UsuarioController.iniciarMonitoramento(USUARIO, CAMINHO, adicionarContatoALista);
@@ -71,7 +78,7 @@ export const ChatScreen = () => {
       <BotaoLista textoBotao="Conversas" cor={selectedTab === 'Conversas' ? 'white' : '#6a2025'} />
       <BotaoLista textoBotao="Grupos" cor={selectedTab === 'Grupos' ? 'white' : '#6a2025'} />
 
-      <ChatList chats={chats.map((chat, index) => ({ id: index, name: chat.id }))} />
+      <ChatList chats={chats.map((chat, index) => ({ id: index, nome: chat.id }))} />
       
       <BotaoLista
         cor="white"

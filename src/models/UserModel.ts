@@ -91,17 +91,22 @@ export class UserModel {
         return DATA_JSON;
     }
 
-    public static monitorarAlteracoesNoBanco(usuario: string, path: string, callback: (data: any) => void) {
+    public static monitorarAlteracoesNoBanco(usuario: string, path: string, callback: (keys: string[], data: any[]) => void) {
         const reference = ref(this.DATA_BASE, path);
-
+    
         // Executando a consulta
         onValue(reference, (snapshot) => {
             if (snapshot) {
                 const data = snapshot.val();
                 if (data) {
+                    // Obtendo as chaves dos chats
+                    const chatKeys = Object.keys(data);
+                    
                     // Filtrando os resultados pela propriedade 'participantes'
                     const filteredData = Object.values(data).filter((item: any) => item.participantes && item.participantes[usuario] === true);
-                    callback(filteredData);
+                    
+                    // Chamando o callback com as chaves e os dados filtrados
+                    callback(chatKeys, filteredData);
                 } else {
                     console.log("Dados do snapshot estão vazios.");
                     // Possíveis ações a serem tomadas se os dados estiverem vazios
@@ -115,6 +120,7 @@ export class UserModel {
             // Possíveis ações a serem tomadas se ocorrer um erro na consulta
         });
     }
+    
 
     public static async adicionarContato(contato: string) {
         if (!contato) return { erro: -1 };
