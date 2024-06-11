@@ -39,7 +39,8 @@ export class UsuarioController
 
         const AUTH_KEY = RESPOSTA["authKey"];
         localStorage.setItem("auth_key", AUTH_KEY);
-
+        localStorage.setItem("usuario", apelido);
+        
         return {
             "codigo": 200,
             "mensagem": "Usuário logado com sucesso!"
@@ -64,6 +65,16 @@ export class UsuarioController
             "codigo": 200,
             "mensagem": "A senha foi alterada com sucesso!"
         };
+    }
+
+    public static adicionarContato(apelido: string)
+    {
+        UserModel.adicionarContato(apelido);
+    }
+
+    public static iniciarMonitoramento(usuario: string, path: string, callback: (data: any) => void)
+    {
+        UserModel.monitorarAlteracoesNoBanco(usuario, path, callback);
     }
 
     private static verificaResposta(resposta: Object)

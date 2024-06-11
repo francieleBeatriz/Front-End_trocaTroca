@@ -8,10 +8,10 @@ import { StyledContainerModalAdicionar,
 } from "../../assets/styles/StyledComponents";
 
 import iconeAdicionar from "../../assets/images/iconeAdicionar2.svg";
-import Input from "../atoms/Input";
-import { useState } from "react";
 
-export function ModalAdicionarContato()
+export function ModalAdicionarContato( 
+    { onChange, onClick }: { onChange: (text: string) => void, onClick: () => void}
+)
 {
     return (
         <StyledContainerModalAdicionar>
@@ -19,11 +19,12 @@ export function ModalAdicionarContato()
                 <StyledSpanAdicionarContato>
                     <StyledSpanImportantAdicionarContato>Apelido.</StyledSpanImportantAdicionarContato> adicione alguém.
                 </StyledSpanAdicionarContato>
-                <StyledInputAdicionarContato/>
+                <StyledInputAdicionarContato onChange={(e) => onChange(e.target.value)}/>
             </StyledLabelAdicionarContato>
             <StyledBotaoAdicionarContato>
                 <img src={iconeAdicionar} 
-                alt="uma imagem de um icone do simbolo da operação matemática de soma" />
+                alt="uma imagem de um icone do simbolo da operação matemática de soma" 
+                onClick={ onClick }/>
             </StyledBotaoAdicionarContato>
         </StyledContainerModalAdicionar>
     );
