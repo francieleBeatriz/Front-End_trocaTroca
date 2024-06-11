@@ -7,15 +7,30 @@ import { StyledBotaoLista, StyledBotaoAdicionar, StyledContainerChat, StyledDivS
 import styles from '../../assets/styles/ChatScreen.module.css';
 
 import { ModalAdicionarContato } from '../organisms/ModalAdicionarContato';
+import SearchModal from '../organisms/SearchModal';
+
+const contacts = [
+  'Alice',
+  'Fran',
+  'Pablio',
+  'Aurora',
+  'Alvaro',
+  'Fabricio',
+  'Grace',
+  'Hank',
+  'Ivy',
+  'Jack',
+];
 
 export const ChatScreen = () => {
   const [searchValue, setSearchValue] = useState('');
-  const [filterOption, setFilterOption] = useState('Existing');
+  const [filterOption, setFilterOption] = useState('Contatos');
   const [selectedTab, setSelectedTab] = useState('Conversas');
   const [abrirModalAdicionarContato, setAbrirModalAdicionarContato] = useState(false);
+  const [abrirModalPesquisarContato, setAbrirModalPesquisarContato] = useState(false);
 
   const handleSearch = () => {
-    // Lógica para pesquisa
+    setAbrirModalPesquisarContato(true);
   };
 
   const handleFilterChange = (option: string) => {
@@ -29,7 +44,8 @@ export const ChatScreen = () => {
   const chats = ['Nome do usuário', 'Nome do usuário'];
 
   return (
-      <StyledContainerChat>
+    <StyledContainerChat>
+      {!abrirModalPesquisarContato ? (
         <SearchBar
           placeholder="Buscar Usuário"
           value={searchValue}
@@ -39,6 +55,13 @@ export const ChatScreen = () => {
           selectedFilterOption={filterOption}
           onFilterChange={handleFilterChange}
         />
+      ) : (
+        <SearchModal 
+          onClose={() => setAbrirModalPesquisarContato(false)} 
+          contacts={contacts}
+          initialSearchValue={searchValue}
+        />
+      )}
 
       <StyledDivSepara>
         <StyledBotaoLista active={selectedTab === 'Conversas'} onClick={() => handleTabChange('Conversas')}>
@@ -50,20 +73,20 @@ export const ChatScreen = () => {
         </StyledBotaoLista>
       </StyledDivSepara>
 
-        <ChatList chats={chats.map((chat, index) => ({ id: index, name: chat }))} />
-        
-        <StyledBotaoAdicionar>
-          <BotaoLista
-            cor="white"
-            textoBotao="Adicionar Contato"
-            imgBotao={iconeAdicionar}
-            onClick={() => setAbrirModalAdicionarContato(true)}
-            reverse={true}
-          />
-        </StyledBotaoAdicionar>
-        
-        {abrirModalAdicionarContato && <ModalAdicionarContato onClose={() => setAbrirModalAdicionarContato(false)} />}
-      </StyledContainerChat>
+      <ChatList chats={chats.map((chat, index) => ({ id: index, name: chat }))} />
+      
+      <StyledBotaoAdicionar>
+        <BotaoLista
+          cor="white"
+          textoBotao="Adicionar Contato"
+          imgBotao={iconeAdicionar}
+          onClick={() => setAbrirModalAdicionarContato(true)}
+          reverse={true}
+        />
+      </StyledBotaoAdicionar>
+      
+      {abrirModalAdicionarContato && <ModalAdicionarContato onClose={() => setAbrirModalAdicionarContato(false)} />}
+    </StyledContainerChat>
   );
 };
 

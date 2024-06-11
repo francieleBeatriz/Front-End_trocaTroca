@@ -302,11 +302,10 @@ export const StyledBotaoAdicionar = styled.button`
    border-radius: 20px;
 
     position: fixed;  
-    bottom: 20px;
-
-
+    bottom: 10px;
+    
    img {
-     margin-right: 5px;
+    margin-right: 5px;
    }
 
    @media (max-width: 768px) {
@@ -314,6 +313,9 @@ export const StyledBotaoAdicionar = styled.button`
       bottom: 5px;
       right: 10px;
    }
+    @media (min-width: 768px) {
+      left: 52%;
+    }
 `;
 
 export const StyledContainerChat = styled.div`

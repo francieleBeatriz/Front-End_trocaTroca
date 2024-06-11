@@ -13,7 +13,7 @@ export class ChatList extends React.Component<ChatListProps>
         return (
           <div className={styles.chatListContainer}>
               {this.props.chats.map((chat) => (
-                <ChatItem key={chat.id} chat={chat.name}></ChatItem>
+                <ChatItem key={chat.id} chat={chat.name} onPinClick={() => handlePinClick(chat.id)}></ChatItem>
               ))}
           </div>
         );
