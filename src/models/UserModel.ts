@@ -92,22 +92,43 @@ export class UserModel {
         return DATA_JSON;
     }
 
-    public static monitorarAlteracoesNoBanco(usuario: string, path: string, callback: (keys: string[], data: any[]) => void) {
+    public static async monitorarAlteracoesNoBanco(usuario: string, path: string, callback: (data: any[]) => void) {
         const reference = ref(this.DATA_BASE, path);
     
         // Executando a consulta
-        onValue(reference, (snapshot) => {
+        onValue(reference, async (snapshot) => {
             if (snapshot) {
                 const data = snapshot.val();
                 if (data) {
                     // Obtendo as chaves dos chats
                     const chatKeys = Object.keys(data);
-                    
-                    // Filtrando os resultados pela propriedade 'participantes'
-                    const filteredData = Object.values(data).filter((item: any) => item.participantes && item.participantes[usuario] === true);
-                    
-                    // Chamando o callback com as chaves e os dados filtrados
-                    callback(chatKeys, filteredData);
+    
+                    // Função auxiliar para buscar o caminhoFoto do usuário
+                    const getFotoPath = async (userId: string) => {
+                        const userRef = ref(this.DATA_BASE, `usuarios/${userId}/caminhoFoto`);
+                        const userSnapshot = await get(userRef);
+                        return userSnapshot.exists() ? userSnapshot.val() : null;
+                    };
+    
+                    // Adicionando caminhoFoto aos dados dos participantes
+                    const enhancedData = await Promise.all(chatKeys.map(async (chatKey: string) => {
+                        const chat = data[chatKey];
+                        const participants = chat.participantes;
+                        const participantKeys = Object.keys(participants);
+    
+                        const participantData = await Promise.all(participantKeys.map(async (participantId: string) => {
+                            const caminhoFoto = await getFotoPath(participantId);
+                            return { participantId, caminhoFoto };
+                        }));
+    
+                        return { chatKey, ...chat, participantData };
+                    }));
+    
+                    // Filtrando os dados para incluir apenas os chats onde o usuário é participante
+                    const filteredData = enhancedData.filter(chat => chat.participantes && chat.participantes[usuario] === true);
+    
+                    // Chamando o callback com os dados filtrados e melhorados
+                    callback(filteredData);
                 } else {
                     console.log("Dados do snapshot estão vazios.");
                     // Possíveis ações a serem tomadas se os dados estiverem vazios
@@ -121,6 +142,7 @@ export class UserModel {
             // Possíveis ações a serem tomadas se ocorrer um erro na consulta
         });
     }
+    
     
 
     public static async adicionarContato(contato: string) {

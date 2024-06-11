@@ -35,15 +35,15 @@ export const ChatScreen = () => {
         
         return;
       }
-      console.log(chaves);
+      console.log(participantes);
 
-      
+      /*
       const lista = Object.keys(participantes).map(chave => ({
         id: chave,
         nome: Object.keys(participantes[chave].participantes)[0]
-      }));
+      }));*/
       
-      setChats(lista);
+      //setChats(lista);
     }
 
     UsuarioController.iniciarMonitoramento(USUARIO, CAMINHO, adicionarContatoALista);
