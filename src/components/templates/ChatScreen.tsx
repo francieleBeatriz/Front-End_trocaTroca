@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SearchBar } from '../molecules/SearchBar';
-import { ChatList } from '../organisms/ChatLista';
+import { ChatLista } from '../organisms/ChatLista';
 import BotaoLista from '../atoms/BotaoLista';
 import iconeAdicionar from '../../assets/images/iconeAdicionar.svg';
 
@@ -12,6 +12,7 @@ import {
 
 import { ModalAdicionarContato } from '../organisms/ModalAdicionarContato';
 import { UsuarioController } from '../../controllers/UsuarioController';
+import { useNavigate } from 'react-router-dom';
 
 export const ChatScreen = () => {
   const [ searchValue, setSearchValue ] = useState('');
@@ -21,6 +22,8 @@ export const ChatScreen = () => {
   const [ contato, setContato ] = useState("");
 
   const [chats, setChats] = useState<any[]>([]);
+
+  const navegarPara = useNavigate();
 
   useEffect(() => {
     const USUARIO = localStorage.getItem("usuario") ?? "";
@@ -32,16 +35,14 @@ export const ChatScreen = () => {
         return;
       }
       console.log(chaves);
-      const ARRAY_USUARIOS:any = {};
 
-      for( let i = 0; i < chaves.length; i++)
-      {
-        ARRAY_USUARIOS["id"] = chaves[i];
-        ARRAY_USUARIOS["nome"] = Object.values(participantes[i])[0];
-      }
-
-      console.log(ARRAY_USUARIOS);
-      //setChats(usuariosArray);
+      
+      const lista = Object.keys(participantes).map(chave => ({
+        id: chave,
+        nome: Object.keys(participantes[chave].participantes)[0]
+      }));
+      
+      setChats(lista);
     }
 
     UsuarioController.iniciarMonitoramento(USUARIO, CAMINHO, adicionarContatoALista);
@@ -59,8 +60,14 @@ export const ChatScreen = () => {
     setSelectedTab(tab);
   };
 
-  const salvarContato = () => {
-    UsuarioController.adicionarContato(contato);
+  const salvarContato = async () => {
+    const RESPONSE = await UsuarioController.adicionarContato(contato);
+
+    if(RESPONSE.hasOwnProperty("expired")) {
+      alert("Sessão expirada!");
+      navegarPara("/login");
+    }
+
   }
 
   return (
@@ -78,7 +85,9 @@ export const ChatScreen = () => {
       <BotaoLista textoBotao="Conversas" cor={selectedTab === 'Conversas' ? 'white' : '#6a2025'} />
       <BotaoLista textoBotao="Grupos" cor={selectedTab === 'Grupos' ? 'white' : '#6a2025'} />
 
-      <ChatList chats={chats.map((chat, index) => ({ id: index, nome: chat.id }))} />
+      <ChatLista 
+        chats={chats}
+      />
       
       <BotaoLista
         cor="white"

@@ -143,6 +143,8 @@ export class UserModel {
 
         const DATA_JSON = await DATA.json();
 
+        if(DATA_JSON.hasOwnProperty("expired")) return DATA_JSON;
+
         if (DATA_JSON["linhasAfetadas"] == -1) return { erro: -1 };
 
         return DATA_JSON;

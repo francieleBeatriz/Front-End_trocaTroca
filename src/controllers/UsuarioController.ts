@@ -67,9 +67,9 @@ export class UsuarioController
         };
     }
 
-    public static adicionarContato(apelido: string)
+    public static async adicionarContato(apelido: string)
     {
-        UserModel.adicionarContato(apelido);
+        return await UserModel.adicionarContato(apelido);
     }
 
     public static iniciarMonitoramento(usuario: string, path: string, callback: (data: any) => void)

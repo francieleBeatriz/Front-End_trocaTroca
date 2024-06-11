@@ -1,21 +1,19 @@
 import React from 'react';
-
 import styles from "../../assets/styles/ChatList.module.css";
 import { ChatItem } from '../molecules/ChatItem';
 
 interface ChatListProps {
-  chats: { id: number; nome: string; }[];
+  chats: { id: string; nome: string; }[];
 }
 
-export class ChatList extends React.Component<ChatListProps> 
-{
-    render(): React.ReactNode {
-        return (
-          <div className={styles.chatListContainer}>
-              {this.props.chats.map((chat) => (
-                <ChatItem key={chat.id} chat={chat.nome}></ChatItem>
-              ))}
-          </div>
-        );
-    }
+export const ChatLista: React.FC<ChatListProps> = ({ chats }) => {
+  return (
+    <div className={styles.chatListContainer}>
+      {chats.map((chat) => (
+        <ChatItem key={chat.id} chat={chat.nome} />
+      ))}
+    </div>
+  );
 };
+
+
