@@ -95,22 +95,29 @@ export class UserModel {
     public static async monitorarAlteracoesNoBanco(usuario: string, path: string, callback: (data: any[]) => void) {
         const reference = ref(this.DATA_BASE, path);
     
-        // Executando a consulta
         onValue(reference, async (snapshot) => {
             if (snapshot) {
                 const data = snapshot.val();
                 if (data) {
-                    // Obtendo as chaves dos chats
                     const chatKeys = Object.keys(data);
     
-                    // Função auxiliar para buscar o caminhoFoto do usuário
-                    const getFotoPath = async (userId: string) => {
-                        const userRef = ref(this.DATA_BASE, `usuarios/${userId}/caminhoFoto`);
-                        const userSnapshot = await get(userRef);
-                        return userSnapshot.exists() ? userSnapshot.val() : null;
+                    const getFotoPath = async (apelido: string) => {
+                        const apelidoRef = ref(this.DATA_BASE, `apelidos/${apelido}`);
+                        const apelidoSnapshot = await get(apelidoRef);
+                        const userId = apelidoSnapshot.exists() ? apelidoSnapshot.val() : null;
+                    
+                        if (userId) {
+                            const userRef = ref(this.DATA_BASE, `usuarios/${userId}/caminhoFoto`);
+                            const userSnapshot = await get(userRef);
+                            if (userSnapshot.exists()) {
+                                return userSnapshot.val();
+                            }
+                        }
+                        
+                        console.log(`No foto path found for ${apelido}`);
+                        return null;
                     };
-    
-                    // Adicionando caminhoFoto aos dados dos participantes
+                    
                     const enhancedData = await Promise.all(chatKeys.map(async (chatKey: string) => {
                         const chat = data[chatKey];
                         const participants = chat.participantes;
@@ -129,9 +136,6 @@ export class UserModel {
     
                     // Chamando o callback com os dados filtrados e melhorados
                     callback(filteredData);
-                } else {
-                    console.log("Dados do snapshot estão vazios.");
-                    // Possíveis ações a serem tomadas se os dados estiverem vazios
                 }
             } else {
                 console.log("Snapshot é nulo ou indefinido.");
@@ -142,7 +146,6 @@ export class UserModel {
             // Possíveis ações a serem tomadas se ocorrer um erro na consulta
         });
     }
-    
     
 
     public static async adicionarContato(contato: string) {
@@ -169,6 +172,87 @@ export class UserModel {
         if(DATA_JSON.hasOwnProperty("expired")) return DATA_JSON;
 
         if (DATA_JSON["linhasAfetadas"] == -1) return { erro: -1 };
+
+        return DATA_JSON;
+    }
+
+    public static monitorarMensagensDoChat(chatId: any, callback: any) {
+        const chatRef = ref(this.DATA_BASE, `chats/${chatId}/mensagens`);
+    
+        onValue(chatRef, async (snapshot) => {
+            const mensagens: any[] = [];
+            const promises: Promise<void>[] = [];
+            
+            snapshot.forEach((childSnapshot) => {
+                const mensagem = {
+                    messageId: childSnapshot.key,
+                    ...childSnapshot.val()
+                };
+    
+                // Adiciona uma promessa para buscar o caminho da foto do remetente
+                promises.push(
+                    this.getFotoPath(mensagem.senderId)
+                        .then((senderFotoPath) => {
+                            // Adiciona o caminho da foto à mensagem
+                            mensagem.senderFotoPath = senderFotoPath;
+                        })
+                        .catch((error) => {
+                            console.error("Erro ao buscar caminho da foto:", error);
+                        })
+                );
+    
+                mensagens.push(mensagem);
+            });
+    
+            // Espera todas as promessas serem resolvidas antes de chamar o callback
+            await Promise.all(promises);
+    
+            // Chama o callback com as mensagens, incluindo os caminhos das fotos
+            callback(mensagens);
+        });
+    };
+    
+    private static async getFotoPath(apelido: string) {
+        const apelidoRef = ref(this.DATA_BASE, `apelidos/${apelido}`);
+        const apelidoSnapshot = await get(apelidoRef);
+        const userId = apelidoSnapshot.exists() ? apelidoSnapshot.val() : null;
+    
+        if (userId) {
+            const userRef = ref(this.DATA_BASE, `usuarios/${userId}/caminhoFoto`);
+            const userSnapshot = await get(userRef);
+            if (userSnapshot.exists()) {
+                return userSnapshot.val();
+            }
+        }
+        
+        console.log(`No foto path found for ${apelido}`);
+        return null;
+    }
+
+    public static async enviarMensagem(chat_id: string, mensagem: string)
+    {
+        const TIMESTAMP = Date.now();
+        const AUTH_KEY = localStorage.getItem("auth_key");
+
+        const DATA = await fetch(
+            `${this.URL}/api/mensagens`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "authKey": `${AUTH_KEY}`,
+                    "chat_id": chat_id,
+                    "mensagem": mensagem,
+                    "timestamp": TIMESTAMP
+                })
+            }
+        )
+
+        const DATA_JSON = await DATA.json();
+
+        if(DATA_JSON.linhasAfetadas == -1) return { erro: 401}
 
         return DATA_JSON;
     }

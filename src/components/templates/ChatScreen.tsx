@@ -37,7 +37,7 @@ export const ChatScreen = () => {
   const [abrirModalAdicionarContato, setAbrirModalAdicionarContato] = useState(false);
   const [abrirModalPesquisarContato, setAbrirModalPesquisarContato] = useState(false);
 
-  const [ contato, setContato ] = useState("");
+  const [contato, setContato] = useState("");
 
   const [chats, setChats] = useState<any[]>([]);
 
@@ -47,24 +47,31 @@ export const ChatScreen = () => {
     const USUARIO = localStorage.getItem("usuario") ?? "";
     const CAMINHO = 'chats';
 
-    const adicionarContatoALista = (chaves: any, participantes?: any) => {
-      if (!chaves || !participantes) {
-        
+    const adicionarContatoALista = (dados: any) => {
+      console.log(dados);
+      if (!dados || dados.length === 0) {
+        console.log("Nenhum dado encontrado");
         return;
       }
-      console.log(participantes);
 
-      /*
-      const lista = Object.keys(participantes).map(chave => ({
-        id: chave,
-        nome: Object.keys(participantes[chave].participantes)[0]
-      }));*/
-      
-      //setChats(lista);
+      const lista = dados.map((chat: any) => {
+        const chatId = chat.chatKey;
+        const primeiroParticipante = chat.participantData.find((p: any) => p.participantId !== USUARIO);
+        const primeiroParticipanteId = primeiroParticipante ? primeiroParticipante.participantId : 'Desconhecido';
+        const caminhoFoto = primeiroParticipante ? primeiroParticipante.caminhoFoto : ''; // Ajuste conforme a estrutura do seu banco
+
+        return {
+          id: chatId,
+          nome: primeiroParticipanteId,
+          caminhoFoto: caminhoFoto
+        };
+      });
+
+      setChats(lista);
     }
 
     UsuarioController.iniciarMonitoramento(USUARIO, CAMINHO, adicionarContatoALista);
-  }, []); /
+  }, []);
 
   const handleSearch = () => {
     setAbrirModalPesquisarContato(true);
@@ -81,15 +88,15 @@ export const ChatScreen = () => {
   const salvarContato = async () => {
     const RESPONSE = await UsuarioController.adicionarContato(contato);
 
-    if(RESPONSE.hasOwnProperty("expired")) {
+    if (RESPONSE.hasOwnProperty("expired")) {
       alert("Sessão expirada!");
       navegarPara("/login");
     }
-
   }
 
   return (
     <StyledContainerChat>
+      
       {!abrirModalPesquisarContato ? (
         <SearchBar
           placeholder="Buscar Usuário"
@@ -118,19 +125,19 @@ export const ChatScreen = () => {
         </StyledBotaoLista>
       </StyledDivSepara>
 
-        <ChatLista chats={chats} />
-        
-        <StyledBotaoAdicionar>
-          <BotaoLista
-            cor="white"
-            textoBotao="Adicionar Contato"
-            imgBotao={iconeAdicionar}
-            onClick={() => setAbrirModalAdicionarContato(true)}
-            reverse={true}
-          />
-        </StyledBotaoAdicionar>
-        
-        {abrirModalAdicionarContato && <ModalAdicionarContato onChange={setContato} onClick={salvarContato} onClose={() => setAbrirModalAdicionarContato(false)} />}
-      </StyledContainerChat>
+      <ChatLista chats={chats} />
+      
+      <StyledBotaoAdicionar>
+        <BotaoLista
+          cor="white"
+          textoBotao="Adicionar Contato"
+          imgBotao={iconeAdicionar}
+          onClick={() => setAbrirModalAdicionarContato(true)}
+          reverse={true}
+        />
+      </StyledBotaoAdicionar>
+      
+      {abrirModalAdicionarContato && <ModalAdicionarContato onChange={setContato} onClick={salvarContato} onClose={() => setAbrirModalAdicionarContato(false)} />}
+    </StyledContainerChat>
   );
 }

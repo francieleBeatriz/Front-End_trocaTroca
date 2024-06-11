@@ -3,22 +3,26 @@ import { StyledCardUsuarioAmigo } from '../../assets/styles/PaginaConversa';
 import { StyledCardMensagemAmigo } from '../../assets/styles/PaginaConversa';
 import { StyledRodapeUsuarioAmigo } from '../../assets/styles/PaginaConversa';
 
-export class CardUsuarioAmigo extends Component
+interface CardUsuarioAmigoProps {
+  mensagem: string;
+  usuario: string;
+  timestamp: string;
+  caminhoFoto: string;
+}
+
+export const CardUsuarioAmigo: React.FC<CardUsuarioAmigoProps> = ({ usuario, caminhoFoto, mensagem, timestamp }) => {
 {
-    render(){  
       return (
         <StyledCardUsuarioAmigo>
             <StyledCardMensagemAmigo>
-                <p>Outro Usuário</p>
+                <p>{usuario}</p>
                 <div> 
-                  HAHAHAHAHAHHA
+                  {mensagem}
                 </div>
             </StyledCardMensagemAmigo>
             <StyledRodapeUsuarioAmigo>
-                <div>
-                </div>
-                <p>Horas:Segundos - Dia Mês Ano
-                </p>
+                <img src={caminhoFoto}></img>
+                <p>{timestamp}</p>
             </StyledRodapeUsuarioAmigo>
         </StyledCardUsuarioAmigo>
       );

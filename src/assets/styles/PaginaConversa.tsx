@@ -142,7 +142,7 @@ export const StyledRodapeUsuarioAmigo = styled.div`
     display: flex;
     margin-top: 7px;
 
-    div{
+    img{
         
         width: 40px;
         height: 40px;
@@ -197,14 +197,13 @@ export const StyledCardMensagem = styled.div`
 export const StyledRodapeUsuario = styled.div`
     display: flex;
     margin-top: 7px;
-
-    div{
-        
+    width: 100%;
+    justify-content: space-between;
+    img{
         width: 40px;
         height: 40px;
         border-radius: 50%;
         background-color: #cccccc;
-        margin-left: 43%;
     }
     p{
         font-size: 10px;

@@ -3,24 +3,30 @@ import { StyledCardUsuario } from '../../assets/styles/PaginaConversa';
 import { StyledCardMensagem } from '../../assets/styles/PaginaConversa';
 import { StyledRodapeUsuario } from '../../assets/styles/PaginaConversa';
 
-export class CardUsuario extends Component
-{
-    render(){  
-      return (
-        <StyledCardUsuario>
-            <StyledCardMensagem>
-                <p>Usuário</p>
-                <div>   
-                    KAKAKKAKAKAKAKKAKAKAKKAKAKAKKAKAKKAKAKKAKAKAKKAKAKAKKAKAKAKAKKAKAKAKKAKA
-                </div>
-            </StyledCardMensagem>
-            <StyledRodapeUsuario>
-                <p>Horas:Segundos - Dia Mês Ano
-                </p>
-                <div>
-                </div>
-            </StyledRodapeUsuario>
-        </StyledCardUsuario>
-      );
-    }
+interface CardUsuarioProps {
+    mensagem: string;
+    usuario: string;
+    timestamp: string;
+    caminhoFoto: string;
+  }
+  
+export const CardUsuario: React.FC<CardUsuarioProps> = ({ usuario, caminhoFoto, mensagem, timestamp }) => {
+return (
+    <StyledCardUsuario>
+    <StyledCardMensagem>
+        <p>
+            {usuario}
+        </p>
+        <div>
+        {mensagem}
+        </div>
+    </StyledCardMensagem>
+    <StyledRodapeUsuario>
+        <p>{timestamp}</p>
+        <img src={caminhoFoto}></img>
+    </StyledRodapeUsuario>
+    </StyledCardUsuario>
+);
 };
+  
+

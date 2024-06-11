@@ -25,7 +25,7 @@ export class UsuarioController
         const AUTH_KEY = RESPOSTA["authKey"];
 
         localStorage.setItem("auth_key", AUTH_KEY);
-
+        localStorage.setItem("usuario", apelido);
         return CHAVE_UNICA;
     }
 
@@ -81,5 +81,23 @@ export class UsuarioController
     private static verificaResposta(resposta: Object)
     {
         return resposta.hasOwnProperty("erro");
+    }
+
+    public static monitorarMensagensDoChat(chatId: any, callback: any)
+    {
+        UserModel.monitorarMensagensDoChat(chatId, callback);
+    }
+
+    public static async enviarMensagem(chat_id: string, mensagem: string)
+    {
+
+        const RESPOSTA = await UserModel.enviarMensagem(chat_id, mensagem);
+
+        if(RESPOSTA.hasOwnProperty("erro")) {
+            alert("Houve um erro ao enviar a mensagem!");
+            return -1;
+        }
+
+        return RESPOSTA;
     }
 }
