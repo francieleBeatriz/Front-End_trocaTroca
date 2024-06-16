@@ -96,58 +96,82 @@ export class UserModel {
         const reference = ref(this.DATA_BASE, path);
     
         onValue(reference, async (snapshot) => {
-            if (snapshot) {
-                const data = snapshot.val();
-                if (data) {
-                    const chatKeys = Object.keys(data);
+            try {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    if (data) {
+                        let chatKeys = Object.keys(data);
+                        console.log(`Retrieved chatKeys: ${chatKeys}`);
     
-                    const getFotoPath = async (apelido: string) => {
-                        const apelidoRef = ref(this.DATA_BASE, `apelidos/${apelido}`);
-                        const apelidoSnapshot = await get(apelidoRef);
-                        const userId = apelidoSnapshot.exists() ? apelidoSnapshot.val() : null;
-                    
-                        if (userId) {
-                            const userRef = ref(this.DATA_BASE, `usuarios/${userId}/caminhoFoto`);
-                            const userSnapshot = await get(userRef);
-                            if (userSnapshot.exists()) {
-                                return userSnapshot.val();
+                        // Filter out undefined keys
+                        chatKeys = chatKeys.filter(chatKey => chatKey !== undefined);
+                        console.log(`Filtered chatKeys: ${chatKeys}`);
+    
+                        const getFotoPath = async (apelido: string) => {
+                            const apelidoRef = ref(this.DATA_BASE, `apelidos/${apelido}`);
+                            const apelidoSnapshot = await get(apelidoRef);
+                            const userId = apelidoSnapshot.exists() ? apelidoSnapshot.val() : null;
+    
+                            if (userId) {
+                                const userRef = ref(this.DATA_BASE, `usuarios/${userId}/caminhoFoto`);
+                                const userSnapshot = await get(userRef);
+                                if (userSnapshot.exists()) {
+                                    return userSnapshot.val();
+                                }
                             }
-                        }
-                        
-                        console.log(`No foto path found for ${apelido}`);
-                        return null;
-                    };
-                    
-                    const enhancedData = await Promise.all(chatKeys.map(async (chatKey: string) => {
-                        const chat = data[chatKey];
-                        const participants = chat.participantes;
-                        const participantKeys = Object.keys(participants);
     
-                        const participantData = await Promise.all(participantKeys.map(async (participantId: string) => {
-                            const caminhoFoto = await getFotoPath(participantId);
-                            return { participantId, caminhoFoto };
+                            console.log(`No foto path found for ${apelido}`);
+                            return null;
+                        };
+    
+                        const enhancedData = await Promise.all(chatKeys.map(async (chatKey: string) => {
+                            if (!chatKey) {
+                                console.warn('Encountered an undefined chatKey');
+                                return null;
+                            }
+    
+                            const chat = data[chatKey];
+                            if (!chat) {
+                                console.warn(`Chat missing for chatKey: ${chatKey}`);
+                                return null;
+                            }
+                            if (!chat.participantes) {
+                                console.warn(`Participantes missing for chatKey: ${chatKey}`);
+                                return null;
+                            }
+    
+                            const participants = chat.participantes;
+                            const participantKeys = Object.keys(participants);
+    
+                            const participantData = await Promise.all(participantKeys.map(async (participantId: string) => {
+                                const caminhoFoto = await getFotoPath(participantId);
+                                return { participantId, caminhoFoto };
+                            }));
+    
+                            return { chatKey, ...chat, participantData };
                         }));
     
-                        return { chatKey, ...chat, participantData };
-                    }));
+                        // Filtrando os dados para incluir apenas os chats onde o usuário é participante
+                        const filteredData = enhancedData.filter(chat => chat && chat.participantes && chat.participantes[usuario] === true);
     
-                    // Filtrando os dados para incluir apenas os chats onde o usuário é participante
-                    const filteredData = enhancedData.filter(chat => chat.participantes && chat.participantes[usuario] === true);
-    
-                    // Chamando o callback com os dados filtrados e melhorados
-                    callback(filteredData);
+                        // Chamando o callback com os dados filtrados e melhorados
+                        callback(filteredData);
+                    } else {
+                        console.log("Snapshot data is empty.");
+                    }
+                } else {
+                    console.log("Snapshot does not exist.");
                 }
-            } else {
-                console.log("Snapshot é nulo ou indefinido.");
-                // Possíveis ações a serem tomadas se o snapshot for nulo ou indefinido
+            } catch (error) {
+                console.error("An error occurred while processing the snapshot:", error);
             }
         }, (error) => {
-            console.error("Ocorreu um erro ao monitorar alterações no banco:", error);
-            // Possíveis ações a serem tomadas se ocorrer um erro na consulta
+            console.error("An error occurred while monitoring database changes:", error);
         });
     }
     
-
+    
+    
     public static async adicionarContato(contato: string) {
         if (!contato) return { erro: -1 };
 

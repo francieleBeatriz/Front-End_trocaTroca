@@ -24,7 +24,7 @@ export function App()
           <Routes>
             <Route
               path="/"
-              element={localStorage.getItem("auth_key") ? <TelaCadastro page={1}/> : <ChatScreen></ChatScreen>}
+              element={localStorage.getItem("auth_key") == null ? <TelaCadastro page={1}/> : <ChatScreen></ChatScreen>}
             />
             <Route
               path="/cadastrar"
